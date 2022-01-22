@@ -1,0 +1,20 @@
+#! /bin/sh
+
+pgrep -x sxhkd > /dev/null || sxhkd &
+
+bspc monitor -d 1 2 3 4 5
+
+bspc config border_width         0
+bspc config window_gap           5
+
+bspc config split_ratio          0.50
+bspc config borderless_monocle   true
+bspc config gapless_monocle      true
+
+exec setxkbmap es &
+exec xinput set-prop 13 340 1 &
+exec xsetroot -cursor_name left_ptr &
+exec feh --bg-fill --randomize $HOME/Imágenes/.bg/* &
+exec bspwmbar &
+# exec $HOME/.config/polybar/launch.sh &
+exec picom &
