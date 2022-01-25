@@ -18,34 +18,87 @@
 
 [colors]
 ;background = ${xrdb:color0:#222}
-background = #333333
+background = #000000
 background-alt = #444
 ;foreground = ${xrdb:color7:#222}
-foreground = #FFFFFF
+foreground = #dfdfdf
 foreground-alt = #555
 primary = #ffb52a
 secondary = #e60053
 alert = #bd2c40
-arch-blue = #1793d1
-arch-gray = #333333
 
+;##################################
+;####        BAR MYBAR         ####
+;##################################
 [bar/mybar]
+bottom = false
 ;monitor = ${env:MONITOR:HDMI-1}
 width = 100%
-height = 20
+height = 27
+;offset-x = 1%
+;offset-y = 1%
+radius = 0
+fixed-center = true
+
+background = #000000
+foreground = ${colors.foreground}
+
+line-size = 0
+line-color = #f00
+
+border-size = 0
+border-color = #00000000
+
+padding-left = 0
+padding-right = 0
+
+module-margin-left = 0.5
+module-margin-right = 0.5
+
+font-0 = "inconsolata:size=10:weight=medium;1"
+font-1 = "material:size=10:weight=regular;1"
+
+modules-left = bspwm eth wlan battery
+modules-center = xwindow
+modules-right = backlight-acpi alsa date
+
+tray-position = right
+tray-padding = 2
+tray-background = #000000
+
+;wm-restack = bspwm
+wm-restack =
+override-redirect =
+
+;scroll-up = bspwm-desknext
+;scroll-down = bspwm-deskprev
+
+scroll-up = i3wm-wsnext
+scroll-down = i3wm-wsprev
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+;##################################
+;####        BAR BOTTOM        ####
+;##################################
+[bar/bottom]
+;monitor = ${env:MONITOR:HDMI-1}
+width = 100%
+height = 25
 ;offset-x = 1%
 ;offset-y = 1%
 radius = 0
 fixed-center = false
+bottom = true
 
-background = ${colors.background}
+background = #00000000
 foreground = ${colors.foreground}
 
 line-size = 0
-line-color = #00000000
+line-color = #f00
 
-border-bottom-size = 0
-border-top-size = 0
+border-size = 0
 border-color = #00000000
 
 padding-left = 0
@@ -54,20 +107,20 @@ padding-right = 0
 module-margin-left = 1
 module-margin-right = 1
 
-font-0 = "iosevka:pixelsize=11:weight=medium;2"
-font-1 = "material:size=12:weight=regular;2"
-font-2 = "siji:pixelsize=10;1
+font-0 = "inconsolata:size=8:weight=medium;1"
+font-1 = "material:size=8:weight=regular;1"
+font-2 = "iosevka:size=8:weight=regular;1"
 
-modules-left = bspwm xwindow
+modules-left = hostname rofi-usb-mount filesystem
 modules-center =
-modules-right = cpu memory xbacklight alsa temperature battery date
-tray-position = right
-tray-padding = 0
+modules-right = temperature memory cpu
+
+;tray-position =
+;tray-padding =
 ;tray-background = #0063ff
 
-wm-restack = bspwm
-;wm-restack = i3
-
+;wm-restack = bspwm
+wm-restack =
 override-redirect =
 
 ;scroll-up = bspwm-desknext
@@ -79,17 +132,90 @@ override-redirect =
 cursor-click = pointer
 cursor-scroll = ns-resize
 
+[bar/example]
+;monitor = ${env:MONITOR:HDMI-1}
+width = 100%
+height = 27
+;offset-x = 1%
+;offset-y = 1%
+radius = 6.0
+fixed-center = false
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 3
+line-color = #f00
+
+border-size = 5
+border-color = #00000000
+
+padding-left = 0
+padding-right = 2
+
+module-margin-left = 1
+module-margin-right = 2
+
+font-0 = "fixed:pixelsize=10;1"
+font-1 = "unifont:fontformat=truetype:size=8:antialias=false;0"
+font-2 = "siji:pixelsize=10;1"
+
+modules-left = bspwm
+modules-center = title
+modules-right = wlan backlight-acpi alsa memory cpu battery date powermenu
+
+tray-position = right
+tray-padding = 2
+;tray-background = #0063ff
+
+;wm-restack = bspwm
+;wm-restack = i3
+
+;override-redirect = true
+
+;scroll-up = bspwm-desknext
+;scroll-down = bspwm-deskprev
+
+;scroll-up = i3wm-wsnext
+;scroll-down = i3wm-wsprev
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+## base setup
+[bar/base]
+monitor                       = ${env:MONITOR}
+locale                        = en_US.UTF-8
+dpi                           = 96
+height                        = 18
+offset-y                      = 8
+font-0                        = JetBrains Mono:style=Regular:size=10;2
+font-1                        = Material Icons:style=Regular:size=9;2
+background                    = #000
+foreground                    = #FFF
+
+
+## center bar
+[bar/center]
+inherit                       = bar/base
+width                         = 60%
+offset-x                      = 350
+
+fixed-center                  = true
+modules-center                = windowlist
+
 [module/xwindow]
 type = internal/xwindow
-label = %title:0:30:...%
-label-font = 0
-background = ${colors.foreground}
-foreground = #FFFFFF
+label = %title%
+label-maxlen = 35
+format-background = #000000
+format-padding = 2
 
 [module/xkeyboard]
 type = internal/xkeyboard
 blacklist-0 = num lock
 
+format-padding = 2
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
 format-prefix-underline = ${colors.secondary}
@@ -105,61 +231,74 @@ label-indicator-underline = ${colors.secondary}
 [module/filesystem]
 type = internal/fs
 interval = 25
+format-mounted-background = #000000
+format-mounted-padding = 2
+format-unmounted-background = #000000
+format-unmounted-padding = 2
 
 mount-0 = /
+mount-1 = /home
 
-label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
-label-unmounted = %mountpoint% not mounted
+label-mounted =  %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
+label-mounted-font = 2
+label-unmounted =  %mountpoint% not mounted
+label-unmounted-font = 2
 label-unmounted-foreground = ${colors.foreground-alt}
 
 [module/bspwm]
 type = internal/bspwm
+format-padding = 2
 
 label-focused = %index%
 label-focused-font = 0
-label-focused-background = ${colors.arch-blue}
-label-focused-padding = 1.5
+label-focused-background = #000000
+label-focused-underline= #000000
+label-focused-padding = 2
 
 label-occupied = %index%
 label-occupied-font = 0
-label-occupied-background = #4f4f4f
-label-occupied-padding = 1.5
+label-occupied-background = #000000
+label-occupied-padding = 2
 
 label-urgent = %index%!
 label-urgent-font = 0
 label-urgent-background = ${colors.alert}
-label-urgent-padding = 1.5
+label-urgent-padding = 2
 
 label-empty = %index%
 label-empty-font = 0
-label-empty-foreground = ${colors.foreground}
-label-empty-padding = 1.5
+label-empty-background = #000000
+label-empty-foreground = ${colors.foreground-alt}
+label-empty-padding = 2
 
 ; Separator in between workspaces
-label-separator = 
+label-separator = |
 
 [module/i3]
 type = internal/i3
 format = <label-state> <label-mode>
 index-sort = true
 wrapping-scroll = false
+format-background = #000000
+format-padding = 2
 
 ; Only show workspaces on the same output as the bar
 ;pin-workspaces = true
 
 label-mode-padding = 2
 label-mode-foreground = #000
-label-mode-background = ${colors.primary}
+label-mode-background = #000000
 
 ; focused = Active workspace on focused monitor
 label-focused = %index%
-label-focused-background = ${colors.background-alt}
-label-focused-underline= ${colors.primary}
+label-focused-background = #888888
+label-focused-underline= #888888
 label-focused-padding = 2
 
 ; unfocused = Inactive workspace on any monitor
 label-unfocused = %index%
 label-unfocused-padding = 2
+label-unfocused-background = #000000
 
 ; visible = Active workspace on unfocused monitor
 label-visible = %index%
@@ -191,6 +330,7 @@ label-song-ellipsis = true
 
 [module/xbacklight]
 type = internal/xbacklight
+format-padding = 2
 
 format = <label> <bar>
 label = BL
@@ -210,56 +350,76 @@ bar-empty-foreground = ${colors.foreground-alt}
 inherit = module/xbacklight
 type = internal/backlight
 card = intel_backlight
+format-background = #000000
+format-padding = 2
+
+label =  %percentage%%
+label-font = 1
+
+format = <label>
 
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix = "[  "
-format-prefix-foreground = ${colors.foreground}
-format-underline = #f90000
-label = %percentage:2%% ]
+format-prefix = " "
+format-prefix-font = 1
+format-prefix-foreground = ${colors.foreground-alt}
+format-underline = #888888
+label = %percentage:2%%
+format-background = #000000
+format-padding = 2
 
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = "[  "
-format-prefix-foreground = ${colors.foreground}
-format-underline = #4bffdc
-label = %percentage_used%% ]
+format-prefix = " "
+format-prefix-font = 2
+format-prefix-foreground = ${colors.foreground-alt}
+format-underline = #888888
+label = %mb_used% (%percentage_used%%)
+format-background = #000000
+format-padding = 2
 
 [module/wlan]
 type = internal/network
 interface = wlp3s0
 interval = 3.0
 
-format-connected = <ramp-signal> <label-connected>
-format-connected-underline = #9f78e1
-label-connected = %essid%
+format-connected = <label-connected>
+format-connected-underline = #888888
+format-connected-background = #000000
+format-connected-padding = 2
+label-connected =  %essid%
+label-connected-font = 1
 
-format-disconnected =
+;format-disconnected = " disconnected"
+;format-disconnected-font = 1
 ;format-disconnected = <label-disconnected>
 ;format-disconnected-underline = ${self.format-connected-underline}
 ;label-disconnected = %ifname% disconnected
 ;label-disconnected-foreground = ${colors.foreground-alt}
 
-ramp-signal-0 = 
-ramp-signal-1 = 
-ramp-signal-2 = 
-ramp-signal-3 = 
-ramp-signal-4 = 
-ramp-signal-foreground = ${colors.foreground-alt}
+;ramp-signal-0 = 
+;ramp-signal-1 = 
+;ramp-signal-2 = 
+;ramp-signal-3 = 
+;ramp-signal-4 = 
+;ramp-signal-foreground = ${colors.foreground-alt}
 
 [module/eth]
 type = internal/network
 interface = enp2s0f2
 interval = 3.0
 
-format-connected-underline = #55aa55
-format-connected-prefix = " "
+format-connected-underline = #888888
+format-connected-prefix = " "
+format-connected-prefix-font = 1
+format-connected-background = #000000
 format-connected-prefix-foreground = ${colors.foreground-alt}
-label-connected = %local_ip%
+format-connected-padding = 2
+label-connected = "connected"
 
-format-disconnected =
+;format-disconnected =
 ;format-disconnected = <label-disconnected>
 ;format-disconnected-underline = ${self.format-connected-underline}
 ;label-disconnected = %ifname% disconnected
@@ -268,16 +428,19 @@ format-disconnected =
 [module/date]
 type = internal/date
 interval = 5
+format-background = #000000
+format-padding = 2
 
 date =
-date-alt = " %Y-%m-%d"
+date-alt = " %d-%m-%Y"
 
 time = %H:%M
 time-alt = %H:%M:%S
 
-format-prefix = 
+format-prefix = 
+format-prefix-font = 1
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #0a6cf5
+format-underline = #888888
 
 label = %date% %time%
 
@@ -288,7 +451,7 @@ format-volume = <label-volume> <bar-volume>
 label-volume = VOL %percentage%%
 label-volume-foreground = ${root.foreground}
 
-label-muted = 🔇 muted
+label-muted = muted
 label-muted-foreground = #666
 
 bar-volume-width = 10
@@ -312,12 +475,18 @@ bar-volume-empty-foreground = ${colors.foreground-alt}
 type = internal/alsa
 
 format-volume = <label-volume> <bar-volume>
-label-volume = VOL
+format-volume-background = #000000
+format-volume-padding = 2
+label-volume = 
+label-volume-font = 1
 label-volume-foreground = ${root.foreground}
 
-format-muted-prefix = " "
+;format-muted-prefix = "muted"
+format-muted-background = #000000
 format-muted-foreground = ${colors.foreground-alt}
-label-muted = sound muted
+format-muted-padding = 2
+label-muted = " muted"
+label-muted-font = 1
 
 bar-volume-width = 10
 bar-volume-foreground-0 = #55aa55
@@ -339,83 +508,135 @@ bar-volume-empty-foreground = ${colors.foreground-alt}
 [module/battery]
 type = internal/battery
 battery = BAT0
-adapter = AC0
-full-at = 98
+adapter = ADP1
+full-at = 100
 
-format-charging = <animation-charging> <label-charging>
-format-charging-underline = #ffb52a
+time-format = %H:%M
 
-format-discharging = <animation-discharging> <label-discharging>
+format-charging = <label-charging>
+format-charging-underline = #888888
+format-charging-background = #000000
+format-charging-padding = 2
+
+format-discharging = <label-discharging>
 format-discharging-underline = ${self.format-charging-underline}
+format-discharging-background = #000000
+format-discharging-padding = 2
 
-format-full-prefix = " "
+format-full-prefix =
 format-full-prefix-foreground = ${colors.foreground-alt}
 format-full-underline = ${self.format-charging-underline}
+format-full-background = #000000
+format-full-padding = 2
 
-ramp-capacity-0 = 
+ramp-capacity-0 = 󰁻
 ramp-capacity-1 = 
 ramp-capacity-2 = 
 ramp-capacity-foreground = ${colors.foreground-alt}
+ramp-capacity-font = 1
 
-animation-charging-0 = 
-animation-charging-1 = 
-animation-charging-2 = 
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
 animation-charging-foreground = ${colors.foreground-alt}
 animation-charging-framerate = 750
 
-animation-discharging-0 = 
-animation-discharging-1 = 
-animation-discharging-2 = 
+animation-discharging-0 = 
+animation-discharging-1 = 
+animation-discharging-2 = 
 animation-discharging-foreground = ${colors.foreground-alt}
 animation-discharging-framerate = 750
+
+label-charging =  %time% %percentage%%
+label-charging-font = 1
+label-discharging =  %time% %percentage%%
+label-discharging-font = 1
+label-full =  FULL
+label-full-font = 1
 
 [module/temperature]
 type = internal/temperature
 thermal-zone = 0
 warn-temperature = 60
+format-background = #000000
+format-padding = 2
 
-format = <ramp> <label>
-format-underline = #f50a4d
-format-warn = <ramp> <label-warn>
+format = <label>
+;format-underline = #f50a4d
+format-warn = <label-warn>
 format-warn-underline = ${self.format-underline}
 
-label = %temperature-c%
-label-warn = %temperature-c%
+label =  %temperature-c%
+label-font = 2
+label-warn =  %temperature-c%
+label-warn-font = 2
 label-warn-foreground = ${colors.secondary}
 
-ramp-0 = 
-ramp-1 = 
-ramp-2 = 
-ramp-foreground = ${colors.foreground-alt}
+;ramp-0 = 
+;ramp-1 = 
+;ramp-2 = 
+;ramp-foreground = ${colors.foreground-alt}
 
 [module/powermenu]
 type = custom/menu
 
-expand-right = true
+;expand-right =
+format-padding = 2
+format-padding-background = #000000
+format-background = #000000
 
-format-spacing = 1
+;format-spacing = 1
 
-label-open = 
+label-open = 
+label-open-font = 2
+label-open-background = #000000
 label-open-foreground = ${colors.secondary}
-label-close =  cancel
+label-close =  cancel
+label-close-font = 1
+label-close-background = #000000
 label-close-foreground = ${colors.secondary}
 label-separator = |
+label-separator-background = #000000
 label-separator-foreground = ${colors.foreground-alt}
 
 menu-0-0 = reboot
+menu-0-0-background = #000000
 menu-0-0-exec = menu-open-1
 menu-0-1 = power off
+menu-0-1-background = #000000
 menu-0-1-exec = menu-open-2
 
 menu-1-0 = cancel
+menu-1-0-background = #000000
 menu-1-0-exec = menu-open-0
 menu-1-1 = reboot
-menu-1-1-exec = sudo reboot
+menu-1-1-background = #000000
+menu-1-1-exec = reboot
 
 menu-2-0 = power off
-menu-2-0-exec = sudo poweroff
+menu-2-0-background = #000000
+menu-2-0-exec = poweroff
 menu-2-1 = cancel
+menu-2-1-background = #000000
 menu-2-1-exec = menu-open-0
+
+[module/hostname]
+type = custom/script
+interval = 256
+format = "<label>"
+format-prefix = " "
+format-padding = 2
+format-background = #000000
+exec = echo "$(uname -n)"
+format-prefix-font = 2
+
+[module/rofi-usb-mount]
+type = custom/script
+exec = ~/.config/polybar/scritps/rofi-usb-mount.sh --check
+tail = true
+click-left = ~/.config/polybar/scritps/rofi-usb-mount.sh --mount
+click-right = ~/.config/polybar/scripts/rofi-usb-mount.sh --umount
+click-middle = ~/.config/polybar/scripts/rofi-usb-mount.sh --umount-all
 
 [settings]
 screenchange-reload = true
@@ -423,10 +644,10 @@ screenchange-reload = true
 ;compositing-background = screen
 ;compositing-foreground = source
 ;compositing-border = over
-;pseudo-transparency = false
+pseudo-transparency = true
 
 [global/wm]
-margin-top = 5
-margin-bottom = 5
+margin-top = 0
+margin-bottom = 0
 
 ; vim:ft=dosini
