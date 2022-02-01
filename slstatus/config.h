@@ -12,6 +12,9 @@ static const char unknown_str[] = "n/a";
 /*
  * function            description                     argument (example)
  *
+ * backlight_perc	backlight percentage		device name
+ * 							(intel_backlight)
+ *
  * battery_perc        battery percentage              battery name (BAT0)
  *                                                     NULL on OpenBSD/FreeBSD
  * battery_state       battery charging state          battery name (BAT0)
@@ -69,6 +72,7 @@ static const struct arg args[] = {
 	{ keyboard_indicators,	" %s ",		"c?n?" },
 //	{ vol_perc,	"VOL: %s ",		"/dev/mixer"	},
 	{ run_command, " [ 墳 %s%%] ", "/bin/sh -c \"amixer get Master | tail -n1 | grep -Po '\\[\\K[^%]*' | head -n1\"" },
+	{ backlight_perc,	"[  %s%% ] ",	"intel_backlight" },
 //	{ disk_perc,	"[  %s%% ] ",		"/"	},
 //	{ disk_perc,	"[  %s%% ] ",		"/home"	},
 //	{ cpu_perc,	"[  %s%% ] ",		NULL	},

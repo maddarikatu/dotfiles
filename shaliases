@@ -1,0 +1,28 @@
+#!/bin/sh
+
+alias zcfg="vim $HOME/.zshrc"					# edit zsh config file
+alias bcfg="vim $HOME/.bashrc"					# edit bash config file
+alias vals="vim $HOME/dotfiles/shaliases"			# edit aliases (this file itself)
+alias v=vim							# open vim
+alias upd="sudo pacman -Syu"					# sync and update pacman packages
+alias updr="sudo pacman -Syu ; reboot"				# upd and reboot
+alias upds="paru -Syu"						# sync and update AUR packages
+alias pi="sudo pacman -S"					# install with pacman
+alias pil="sudo pacman -U"					# install from local .pkg.tar.zst
+alias pai="paru -S"						# install from AUR (with paru)
+alias pr="sudo pacman -Rs"					# remove package and dependencies
+alias psc="pacman -Ss"						# search from official repos
+alias pasc="paru -Ss"						# search from AUR
+alias pq="pacman -Q"						# search local packages
+alias rmd="rm -fr"						# remove reclusively ("for real")
+alias pv="cd .."						# move to previous directory
+alias syse="sudo systemctl enable --now"			# enable systemd service (now)
+alias sysd="sudo systemctl disable --now"			# disable systemd service (now)
+alias sysst="sudo systemctl start"				# start systemd service for this session
+alias syssp="sudo systemctl stop"				# stop systemd service for this session
+alias gcl="git clone"						# clone git repo
+alias gad="git add ."						# add folder to git repo
+alias gcmm="git commit -m"					# make commit to git repo
+alias gph="git push"						# send git commit
+alias mkef="make clean && make -j4 && sudo make install"	# full make (clean, compile and install)
+alias x="startx"						# start X session from $HOME/.xinitrc
