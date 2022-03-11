@@ -1,0 +1,25 @@
+#!/bin/sh 
+
+# shfuncs.
+# Shell function dumpster (Source on shell's .rc).
+
+DOTFDIR=$HOME/dotfiles
+VALS=$DOTFDIR/shaliases
+
+aliasadd() {
+	read -p "Alias name: " name
+	read -p "Alias function: " func
+	read -p "(Optional) Function description: " desc
+
+	printf "alias %s=\"%s\"\t\t# %s\n" "$name" "$func" "$desc" >> $VALS
+} # Add an alias
+
+wtar() {
+	LINK=$1
+	TAR=$(echo $LINK | sed 's/.*\///')
+	DIR=$(tar -tf $TAR | head -n 1)
+	
+	wget $LINK
+	tar -axpvf $TAR
+	mv $TAR $DIR
+} # Get a tarball from the web, extract it and move the tarball to the extracted directory
