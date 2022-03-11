@@ -10,8 +10,12 @@ aliasadd() {
 	read -p "Alias name: " name
 	read -p "Alias function: " func
 	read -p "(Optional) Function description: " desc
-
-	printf "alias %s=\"%s\"\t\t# %s\n" "$name" "$func" "$desc" >> $VALS
+	
+	if [ ! $desc == '' ]; then
+		printf "\n# %s\nalias %s=\"%s\"\n" "$desc" "$name" "$func" >> $VALS
+	else
+		printf "\nalias %s=\"%s\"\n" "$name" "$func" >> $VALS
+	fi
 } # Add an alias
 
 wtar() {
