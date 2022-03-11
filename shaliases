@@ -9,8 +9,10 @@ alias vals="vim $HOME/dotfiles/shaliases"
 # edit functions
 alias vfuncs="vim $HOME/dotfiles/shfuncs"
 
-# echo options on this file
-alias als="cat $HOME/dotfiles/shaliases | grep \"alias \""
+# echo this file
+alias als="cat $HOME/dotfiles/shaliases"
+# echo only options on this file
+alias also="cat $HOME/dotfiles/shaliases | grep --color=never \"alias \""
 
 # open vim
 alias v=vim
@@ -67,6 +69,10 @@ alias gph="git push"
 
 # full make (clean, compile and install)
 alias mkef="make clean && make -j4 && sudo make install"
+# Process to generate cmake environment without prefix
+alias cemakelcl="mkdir Build && cd Build && cmake .."
+# Process to generate cmake environment with prefix /usr
+alias cemake="mkdir Build && cd Build && cmake .. -DCMAKE_INSTALL_PREFIX=/usr"
 
 # start X session from $HOME/.xinitrc
 alias x="startx"
