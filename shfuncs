@@ -18,6 +18,24 @@ aliasadd() {
 	fi
 } # Add an alias
 
+aliasdel() {
+	read -p "Alias to delete: " ALIAS
+	DELETE=$(grep -B1 $ALIAS $VALS)
+	AVALIBLE=$(grep "alias " $VALS | awk '{print $2}' | cut -f1 -d"=")
+
+	if [[ ! $(echo "$AVALIBLE" | grep -w "$ALIAS") ]]; then
+		echo "$ALIAS is not a listed alias."
+		return 1
+	fi
+
+	printf "The following lines will be deleted:\n\n%s\n" "$DELETE"
+	read -p "Confirm removal (type 'yes') " CONFIRM
+	if [ $CONFIRM == 'yes' ]; then
+		sed "s/$DELETE//"
+	fi
+	return 0
+}
+
 wtar() {
 	LINK=$1
 	TAR=$(echo $LINK | sed 's/.*\///')
