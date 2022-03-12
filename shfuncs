@@ -30,11 +30,11 @@ aliasdel() {
 
 	printf "The following lines will be deleted:\n\n%s\n" "$DELETE"
 	read -p "Confirm removal (type 'yes') " CONFIRM
-	if [ $CONFIRM == 'yes' ]; then
+	if [[ $CONFIRM == 'yes' ]]; then
 		sed "s/$DELETE//"
 	fi
 	return 0
-}
+} # Delete an alias
 
 wtar() {
 	LINK=$1
