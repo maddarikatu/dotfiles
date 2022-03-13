@@ -45,3 +45,11 @@ wtar() {
 	tar -axpvf $TAR
 	mv $TAR $DIR
 } # Get a tarball from the web, extract it and move the tarball to the extracted directory
+
+acst() {
+	ID=$1
+	if [[ ! $ID == "acestream://*" ]]; then
+		ID="acestream://$ID"
+	fi
+	exec acestream-launcher --player mpv $ID
+} # Open acestream from IDs instead of typing the whole thing
