@@ -66,6 +66,8 @@ alias gad="git add ."
 alias gcmm="git commit -m"
 # send git commit
 alias gph="git push"
+# Pull from git repo
+alias gpl="git pull"
 
 # full make (clean, compile and install)
 alias mkef="make clean && make -j4 && sudo make install"
