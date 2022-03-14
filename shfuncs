@@ -39,10 +39,10 @@ aliasdel() {
 wtar() {
 	LINK=$1
 	TAR=$(echo $LINK | sed 's/.*\///')
-	DIR=$(tar -tf $TAR | head -n 1)
 	
-	wget $LINK
-	tar -axpvf $TAR
+	wget $LINK && tar -axpvf $TAR
+
+	DIR=$(tar -tf $TAR | head -n 1)
 	mv $TAR $DIR
 } # Get a tarball from the web, extract it and move the tarball to the extracted directory
 
