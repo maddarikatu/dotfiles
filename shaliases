@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# shalises
+# Shell alias dumpster (Source on shell's .rc)
+
 # edit zsh config file
 alias zcfg="vim $HOME/.zshrc"
 # edit bash config file

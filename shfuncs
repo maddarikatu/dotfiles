@@ -11,7 +11,7 @@ aliasadd() {
 	read -p "Alias function: " func
 	read -p "(Optional) Function description: " desc
 	
-	if [ ! $desc == '' ]; then
+	if [[ ! $desc == '' ]]; then
 		printf "\n# %s\nalias %s=\"%s\"\n" "$desc" "$name" "$func" >> $VALS
 	else
 		printf "\nalias %s=\"%s\"\n" "$name" "$func" >> $VALS

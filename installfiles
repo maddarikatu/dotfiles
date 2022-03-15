@@ -1,0 +1,65 @@
+#!/bin/bash
+
+# installfiles
+# Script to install the dotfiles
+
+# Variables
+DOTF_DIR=$HOME/dotfiles
+CFG_DIR=$HOME/.config_try
+
+ALL_CFG=(alacritty bspwm i3 picom polybar sxhkd)
+CFG_FILE_NAMES=(alacritty.yml bspwmrc config picom.conf config sxhkdrc)
+
+find_position() {
+	local i=0;
+	
+	for file in ${ALL_CFG[@]}; do
+		if [[ $1 == "${ALL_CFG[$i]}" ]]; then
+			POS=$i
+		else
+			((i++))
+		fi
+	done
+}
+
+buff_find() {
+	if [[ $(echo "${ALL_CFG[@]}" | grep -w $1) ]]; then
+		find_position $1
+	else
+		echo "Option '$1' unknown" && exit
+	fi
+}	# buffer for find_position cause if options dont exist itll copy
+	# the first element. may have to work to get this buff inserted
+	# on find_position itself.
+
+copy_file() {
+	buff_find $1
+
+	CP_DIR=$CFG_DIR/${ALL_CFG[$POS]}
+	CP_FILE=$CP_DIR/${CFG_FILE_NAMES[$POS]}
+	LOCAL_FILE=.config/${ALL_CFG[$POS]}/${CFG_FILE_NAMES[$POS]}
+
+	[ ! -d $CFG_DIR ] && mkdir -v --parents $CFG_DIR
+	[ ! -d $CP_DIR ] && mkdir -v --parents $CP_DIR
+	[ -f $CP_FILE ] && mv -vf $CP_FILE ${CP_FILE}.old
+	cp -v $LOCAL_FILE $CP_FILE
+
+	return 0
+
+}
+
+copy_all() {
+	for file in "${ALL_CFG[@]}"; do
+		copy_file $file
+	done
+}
+
+case $1 in
+	''|all)
+		copy_all
+		;;
+	*)
+		copy_file $1
+		;;
+esac
+# Intended functionality: put one or more names, find that on the arrays and copy it.
