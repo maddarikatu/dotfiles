@@ -1,0 +1,36 @@
+#!/bin/sh
+
+# WIP
+
+# instalfiles
+# Script to install the dotfiles
+
+# Variables
+DOTF_DIR=$HOME/dotfiles
+CFG_DIR=$HOME/.config_try
+
+ALL_CFG=(alacritty bspwm i3 picom polybar sxhkd)
+CFG_FILE_NAMES=(alacritty.xml bspwmrc config picom.conf config sxhkdrc)
+
+CP_DIR=$CFG_DIR/${ALL_CFG[$POS]}
+CP_FILE=$CP_DIR/${CFG_FILE_NAMES[$POS]}
+LOCAL_FILE=${ALL_CFG[$POS]}/${CFG_FILE_NAMES[$POS]}
+
+find_position() {
+	for i in "${!ALL_CFG[@]}"; do
+		if [[ "${ALL_CFG[$i]}" = $1 ]]; then
+			POS=$i
+			break
+		fi
+	done
+}
+
+copy_file() {
+	find_position $1
+	[ ! -d $CP_DIR ] && mkdir $CP_DIR
+	[ -f $CP_FILE ] && mv -v ${CP_FILE}.old
+	cp -v $LOCAL_FILE $CP_FILE
+}
+
+copy_file $1
+# Intended functionality: put one or more names, find that on the arrays and copy it.
