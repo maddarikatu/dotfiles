@@ -3,6 +3,7 @@
 # shalises
 # Shell alias dumpster (Source on shell's .rc)
 
+# # #	EDIT SHELL FILES
 # edit zsh config file
 alias zcfg="vim $HOME/.zshrc"
 # edit bash config file
@@ -14,18 +15,18 @@ alias vfuncs="vim $HOME/dotfiles/shfuncs"
 
 # echo this file
 alias als="cat $HOME/dotfiles/shaliases"
-# echo only options on this file
+# echo only options on this file ('alias' prints all of them)
 alias also="cat $HOME/dotfiles/shaliases | grep --color=never \"alias \""
 
+# # #	OPEN PROGRAMS
 # open vim
 alias v=vim
 
+# # #	PACMAN AND PARU COMMANDS
 # sync and update pacman packages
 alias upd="sudo pacman -Syu"
-
 # upd and reboot
 alias updr="sudo pacman -Syu ; reboot"
-
 # install with pacman
 alias pi="sudo pacman -S"
 # install from local .pkg.tar.zst
@@ -44,14 +45,19 @@ alias pai="paru -S"
 # search from AUR
 alias pasc="paru -Ss"
 
-# remove reclusively ("for real")
+# # #	PLAY WITH FILES AND DIRECTORIES
+# remove reclusively
 alias rmd="rm -fr"
-
 # move to previous directory
 alias pv="cd .."
 # Self explainatory.
 alias ll="ls -l"
+# Get number of elements in a diretory
+alias howmany="ls | wc -l"
+# Get number of elements in a directory including hidden
+alias howmanyall="ls -a | wc -l"
 
+# # #	SYSTEMD AND OPENRC COMMANDS
 # enable systemd service (now)
 alias syse="sudo systemctl enable --now"
 # disable systemd service (now)
@@ -61,6 +67,12 @@ alias sysst="sudo systemctl start"
 # stop systemd service for this session
 alias syssp="sudo systemctl stop"
 
+# rc-update
+alias rcu="rc-update"
+# rc-service
+alias rcs="rc-service"
+
+# # #	GIT COMMANDS
 # clone git repo
 alias gcl="git clone"
 # add folder to git repo
@@ -72,17 +84,15 @@ alias gph="git push"
 # Pull from git repo
 alias gpl="git pull"
 
+# # #	COMPILING COMMANDS
 # full make (clean, compile and install)
-alias mkef="make clean && make -j4 && sudo make install"
+alias mkef="make clean && make -j8 && sudo make install"
 # Process to generate cmake environment without prefix
 alias cemakelcl="mkdir Build && cd Build && cmake .."
 # Process to generate cmake environment with prefix /usr
 alias cemake="mkdir Build && cd Build && cmake .. -DCMAKE_INSTALL_PREFIX=/usr"
+# make config.h for suckless style programs
+alias mkcfg="rm config.h && make config.h"
 
 # start X session from $HOME/.xinitrc
 alias x="startx"
-
-# Get number of elements in a diretory
-alias howmany="ls | wc -l"
-# Get number of elements in a directory including hidden
-alias howmanyall="ls -a | wc -l"

@@ -7,19 +7,30 @@ DOTFDIR=$HOME/dotfiles
 VALS=$DOTFDIR/shaliases
 
 aliasadd() {
-	read -p "Alias name: " name
+	if [[ ! $1 == '' ]]; then
+		name=$1
+	else
+		read -p "Alias name: " name
+	fi
 	read -p "Alias function: " func
 	read -p "(Optional) Function description: " desc
 	
 	if [[ ! $desc == '' ]]; then
 		printf "\n# %s\nalias %s=\"%s\"\n" "$desc" "$name" "$func" >> $VALS
+		return 0
 	else
 		printf "\nalias %s=\"%s\"\n" "$name" "$func" >> $VALS
+		return 0
 	fi
 } # Add an alias
 
 aliasdel() {
-	read -p "Alias to delete: " ALIAS
+	if [[ ! $1 == '' ]]; then
+		ALIAS=$1
+	else
+		read -p "Alias to delete: " ALIAS
+	fi
+
 	DELETE=$(grep -B1 $ALIAS $VALS)
 	AVALIBLE=$(grep "alias " $VALS | awk '{print $2}' | cut -f1 -d"=")
 
@@ -31,7 +42,7 @@ aliasdel() {
 	printf "The following lines will be deleted:\n\n%s\n" "$DELETE"
 	read -p "Confirm removal (type 'yes') " CONFIRM
 	if [[ $CONFIRM == 'yes' ]]; then
-		sed "s/$DELETE//"
+		sed "s/$DELETE//" $VALS
 	fi
 	return 0
 } # Delete an alias
@@ -44,6 +55,7 @@ wtar() {
 
 	DIR=$(tar -tf $TAR | head -n 1)
 	mv $TAR $DIR
+	return 0
 } # Get a tarball from the web, extract it and move the tarball to the extracted directory
 
 acst() {
@@ -52,4 +64,5 @@ acst() {
 		ID="acestream://$ID"
 	fi
 	exec acestream-launcher --player mpv $ID
+	return 0
 } # Open acestream from IDs instead of typing the whole thing
