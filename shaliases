@@ -92,7 +92,7 @@ alias cemakelcl="mkdir Build && cd Build && cmake .."
 # Process to generate cmake environment with prefix /usr
 alias cemake="mkdir Build && cd Build && cmake .. -DCMAKE_INSTALL_PREFIX=/usr"
 # make config.h for suckless style programs
-alias mkcfg="rm config.h && make config.h"
+alias mkcfg="rm config.h; make config.h"
 
 # start X session from $HOME/.xinitrc
 alias x="startx"
