@@ -3,7 +3,7 @@
 # shfuncs.
 # Shell function dumpster (Source on shell's .rc).
 
-DOTFDIR=$HOME/dotfiles
+DOTFDIR=$HOME/git/dotfiles
 VALS=$DOTFDIR/shaliases
 
 aliasadd() {

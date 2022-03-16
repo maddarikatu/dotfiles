@@ -9,14 +9,14 @@ alias zcfg="vim $HOME/.zshrc"
 # edit bash config file
 alias bcfg="vim $HOME/.bashrc"
 # edit this file itself
-alias vals="vim $HOME/dotfiles/shaliases"
+alias vals="vim $HOME/git/dotfiles/shaliases"
 # edit functions
-alias vfuncs="vim $HOME/dotfiles/shfuncs"
+alias vfuncs="vim $HOME/git/dotfiles/shfuncs"
 
 # echo this file
-alias als="cat $HOME/dotfiles/shaliases"
+alias als="cat $HOME/git/dotfiles/shaliases"
 # echo only options on this file ('alias' prints all of them)
-alias also="cat $HOME/dotfiles/shaliases | grep --color=never \"alias \""
+alias also="cat $HOME/git/dotfiles/shaliases | grep --color=never \"alias \""
 
 # # #	OPEN PROGRAMS
 # open vim
@@ -56,6 +56,13 @@ alias ll="ls -l"
 alias howmany="ls | wc -l"
 # Get number of elements in a directory including hidden
 alias howmanyall="ls -a | wc -l"
+# Bunch of dirs
+alias bg="cd $HOME/Imágenes/.bg && ls"
+alias dw="cd $HOME/Descargas && ls"
+alias dm="cd $HOME/Documentos && ls"
+alias gm="cd $HOME/Games && ls"
+alias dotf="cd $HOME/git/dotfiles && ls"
+alias rps="cd $HOME/repos && ls"
 
 # # #	SYSTEMD AND OPENRC COMMANDS
 # enable systemd service (now)
