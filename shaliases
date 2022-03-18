@@ -103,3 +103,6 @@ alias mkcfg="rm config.h; make config.h"
 
 # start X session from $HOME/.xinitrc
 alias x="startx"
+
+# Run pridefetch with the bisexual flag by default
+alias pridefetch="/usr/local/bin/pridefetch -f bisexual"
