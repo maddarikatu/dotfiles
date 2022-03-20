@@ -16,7 +16,7 @@ alias vfuncs="vim $HOME/git/dotfiles/shfuncs"
 # echo this file
 alias als="cat $HOME/git/dotfiles/shaliases"
 # echo only options on this file ('alias' prints all of them)
-alias also="cat $HOME/git/dotfiles/shaliases | grep --color=never \"alias \""
+alias also="grep --color=never \"alias \" $HOME/git/dotfiles/shaliases"
 
 # # #	OPEN PROGRAMS
 # open vim
