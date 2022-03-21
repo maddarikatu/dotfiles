@@ -42,7 +42,7 @@ copy_file() {
 
 	CP_DIR=$CFG_DIR/${ALL_CFG[$POS]}
 	CP_FILE=$CP_DIR/${CFG_FILE_NAMES[$POS]}
-	LOCAL_FILE=.config/${ALL_CFG[$POS]}/${CFG_FILE_NAMES[$POS]}
+	LOCAL_FILE=config/${ALL_CFG[$POS]}/${CFG_FILE_NAMES[$POS]}
 
 	[ ! -d $CFG_DIR ] && mkdir -v --parents $CFG_DIR
 	[ ! -d $CP_DIR ] && mkdir -v --parents $CP_DIR
