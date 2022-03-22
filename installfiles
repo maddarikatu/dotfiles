@@ -6,7 +6,7 @@
 # In the case of polybar it just copies the config file but not the other stuff
 
 # Variables
-DOTF_DIR=$HOME/dotfiles
+DOTF_DIR=$HOME/git/dotfiles
 CFG_DIR=$HOME/.config
 
 ALL_CFG=(alacritty bspwm i3 nvim picom polybar sxhkd)
@@ -88,13 +88,8 @@ EOF
 }
 
 case $1 in
-	''|all)
-		copy_all
-		;;
-	list)
-		echo "Avalible configs are ${ALL_CFG[*]}"
-	*)
-		copy_file $1
-		;;
+	''|all)	copy_all ;;
+	list)	echo "Avalible configs are ${ALL_CFG[*]}" ;;
+	*)	copy_file $1 ;;
 esac
 # Intended functionality: put one or more names, find that on the arrays and copy it.
