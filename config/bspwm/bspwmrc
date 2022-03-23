@@ -12,7 +12,7 @@ bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 
 exec setxkbmap es &
-exec xinput set-prop "ELAN1200:00 04F3:3045 Touchpad" "libinput Tapping Enabled" 1
+exec xinput set-prop "Elan Touchpad" "libinput Tapping Enabled" 1
 exec xsetroot -cursor_name left_ptr &
 exec feh --bg-fill --randomize $HOME/Imágenes/.bg/* &
 exec bspwmbar &

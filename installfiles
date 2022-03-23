@@ -81,7 +81,7 @@ usage() {
 	cat << EOF
 	installfiles
 
-	./installfiles [program]|all|list	
+	./installfiles [program]|all|list
 
 	Script to install dotfiles made by me (maddarikatu).
 EOF
