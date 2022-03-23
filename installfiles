@@ -89,6 +89,7 @@ EOF
 
 case $1 in
 	''|all)	copy_all ;;
+	zshrc)	cp -vf ./zshrc $HOME/.zshrc ;;
 	list)	echo "Avalible configs are ${ALL_CFG[*]}" ;;
 	*)	copy_file $1 ;;
 esac
