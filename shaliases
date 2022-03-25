@@ -28,7 +28,7 @@ alias upd="sudo pacman -Syu"
 # alias upd="sudo xbps-install -Su"
 # alias upd="sudo apt update && sudo apt upgrade"
 # upd and reboot
-alias updr="sudo pacman -Su ; reboot"
+alias updr="sudo pacman -Syu ; reboot"
 # alias updr="sudo xbps-install -Su ; reboot"
 # alias updr="sudo apt-update && sudo apt upgrade ; reboot"
 # install with pacman
