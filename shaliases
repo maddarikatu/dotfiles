@@ -46,7 +46,7 @@ alias pr="sudo pacman -Rs"
 # alias pr="sudo xbps-remove -Ro"
 # alias pr="sudo apt-get purge"
 # remove orphans
-alias rm-orphs="sudo pacman -Qtdq | pacman -Rns -"
+alias rm-orphs="pacman -Qtdq | sudo pacman -Rns -"
 # alias rm-orphs="sudo xbps-remove -O"
 # alias rm-orphs="sudo apt-get autoremove"
 # search from official repos
