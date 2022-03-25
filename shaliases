@@ -22,21 +22,41 @@ alias also="grep --color=never \"alias \" $HOME/git/dotfiles/shaliases"
 # open vim
 alias v=vim
 
-# # #	PACMAN AND PARU COMMANDS
+# # #	PACKAGE MANAGER COMMANDS
 # sync and update pacman packages
 alias upd="sudo pacman -Syu"
+# alias upd="sudo xbps-install -Su"
+# alias upd="sudo apt update && sudo apt upgrade"
 # upd and reboot
-alias updr="sudo pacman -Syu ; reboot"
+alias updr="sudo pacman -Su ; reboot"
+# alias updr="sudo xbps-install -Su ; reboot"
+# alias updr="sudo apt-update && sudo apt upgrade ; reboot"
 # install with pacman
 alias pi="sudo pacman -S"
+# alias pi="sudo xbps-install -S"
+# alias pi="sudo apt install"
 # install from local .pkg.tar.zst
 alias pil="sudo pacman -U"
+# alias pil="sudo xbps-install --repository ."
+# alias pil="sudo dpkg -i"
+# install from xbps-src
+# alias pil-src="sudo xbps-install --repository hostdir/binpkgs"
 # remove package and dependencies
 alias pr="sudo pacman -Rs"
+# alias pr="sudo xbps-remove -Ro"
+# alias pr="sudo apt-get purge"
+# remove orphans
+alias rm-orphs="sudo pacman -Qtdq | pacman -Rns -"
+# alias rm-orphs="sudo xbps-remove -O"
+# alias rm-orphs="sudo apt-get autoremove"
 # search from official repos
 alias psc="pacman -Ss"
+# alias psc="xbps-query -Rs"
+# alias psc="apt search"
 # search local packages
 alias pq="pacman -Q"
+# alias pq="xbps-query -s"
+# alias pq="apt list --installed"
 
 # sync and update AUR packages
 alias upds="paru -Syu"
