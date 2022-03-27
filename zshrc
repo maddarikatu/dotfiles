@@ -25,7 +25,7 @@ bindkey -v
 # End of lines configured by zsh-newuser-install
 
 export PROMPT="%B[%n@%F{#1793d1}%m%f %~]%#%b "
-export RPROMPT="%t"
+export RPROMPT="%T"
 
 source $HOME/git/dotfiles/shaliases
 source $HOME/git/dotfiles/shfuncs
