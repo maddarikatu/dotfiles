@@ -24,8 +24,10 @@ unsetopt autocd extendedglob nomatch notify
 bindkey -v
 # End of lines configured by zsh-newuser-install
 
-export PROMPT="%B[%n@%F{#34be5b}%m%f %~]%#%b "
+export PROMPT="%B[%n@%F{#1793d1}%m%f %~]%#%b "
 export RPROMPT="%t"
 
 source $HOME/git/dotfiles/shaliases
 source $HOME/git/dotfiles/shfuncs
+
+PATH="$PATH:$HOME/.local/bin"
