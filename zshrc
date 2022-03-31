@@ -31,3 +31,4 @@ source $HOME/git/dotfiles/shaliases
 source $HOME/git/dotfiles/shfuncs
 
 PATH="$PATH:$HOME/.local/bin"
+EDITOR=nvim
