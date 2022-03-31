@@ -19,8 +19,9 @@ alias als="cat $HOME/git/dotfiles/shaliases"
 alias also="grep --color=never \"alias \" $HOME/git/dotfiles/shaliases"
 
 # # #	OPEN PROGRAMS
-# open vim
-alias v=vim
+# open nvim
+alias v=nvim
+alias vim=nvim
 
 # # #	PACKAGE MANAGER COMMANDS
 # sync and update pacman packages
