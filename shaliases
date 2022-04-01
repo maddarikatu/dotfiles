@@ -72,7 +72,7 @@ alias rmd="rm -fr"
 # move to previous directory
 alias pv="cd .."
 # Self explainatory.
-alias ll="ls -l"
+alias ll="ls -lh --color=auto --group-directories-first"
 # Get number of elements in a diretory
 alias howmany="ls | wc -l"
 # Get number of elements in a directory including hidden
@@ -81,6 +81,7 @@ alias howmanyall="ls -a | wc -l"
 alias bg="cd $HOME/Imágenes/.bg && ls"
 alias dw="cd $HOME/Descargas && ls"
 alias dm="cd $HOME/Documentos && ls"
+alias ap="cd $HOME/Documentos/apuntes/2022-1 && ls"
 alias gm="cd $HOME/Games && ls"
 alias dotf="cd $HOME/git/dotfiles && ls"
 alias rps="cd $HOME/repos && ls"
