@@ -29,8 +29,5 @@ export RPROMPT="%T"
 
 source $HOME/git/dotfiles/shaliases
 source $HOME/git/dotfiles/shfuncs
+source $HOME/git/dotfiles/shvars
 source $HOME/git/dotfiles/LF_ICONS
-
-PATH="$PATH:$HOME/.local/bin"
-EDITOR=nvim
-TEXMFDIST=/usr/share/texmf-dist
