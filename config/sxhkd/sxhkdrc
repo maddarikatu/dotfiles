@@ -1,8 +1,4 @@
-#
-# wm independent hotkeys
-#
-
-# terminal emulator
+# wm independent hotkeys terminal emulator super + Return
 super + Return
 	alacritty
 
@@ -168,7 +164,11 @@ XF86MonBrightnessUp
 
 # screenshot
 Print
-	scrot '/home/fede/Imágenes/scrot-%Y-%m-%d_%H-%m-%s_$wx$h'
+	gscreenshot
+#	scrot '/home/fede/Imágenes/scrot-%Y-%m-%d_%H-%m-%s_$wx$h.png'
+
+#shift + Print
+#	sh /home/fede/.local/bin/tirapantallas
 
 #lock session
 #XF86ScreenSaver
@@ -182,10 +182,10 @@ super + o ; {t,y}
 	{firefox,libreoffice --writer}
 
 super + o ; i
-	alacritty -e vim
+	alacritty -e nvim
 
 super + o ; u
-	alacritty -e ranger
+	alacritty -e "ranger"
 
 # polybar
 # super + z

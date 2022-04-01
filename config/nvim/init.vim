@@ -13,7 +13,7 @@ Plug 'vim-airline/vim-airline-themes'
 call plug#end()
 
 map <F5> :NERDTreeToggle<CR>
-autocmd VimEnter * NERDTree | wincmd p
+"autocmd VimEnter * NERDTree | wincmd p
 
 let g:airline_powerline_fonts = 1
 syntax enable

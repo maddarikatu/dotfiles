@@ -15,7 +15,7 @@ scrolling.history: 20000
 # font tbd
 
 font:
-  size: 8.0
+  size: 7.0
 
 colors.primary:
   background: '#000000'

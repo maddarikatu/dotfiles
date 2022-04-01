@@ -1,0 +1,93 @@
+#!/bin/bash
+
+# installfiles
+# Script to install the dotfiles
+
+# In the case of polybar it just copies the config file but not the other stuff
+
+# Variables
+DOTF_DIR=$HOME/git/dotfiles
+CFG_DIR=$HOME/.config
+
+ALL_CFG=(alacritty bspwm i3 nvim picom polybar sxhkd)
+CFG_FILE_NAMES=(alacritty.yml bspwmrc config init.vim picom.conf config sxhkdrc)
+
+find_position() {
+	local i=0;
+	
+	for file in ${ALL_CFG[@]}; do
+		if [[ $1 == "${ALL_CFG[$i]}" ]]; then
+			POS=$i
+			break
+		else
+			((i++))
+		fi
+	done
+}
+
+buff_find() {
+	if [[ $(echo "${ALL_CFG[@]}" | grep -w $1) ]]; then
+		find_position $1
+	else
+		printf "\tOption '%s' unknown. Avalible options are:\n\t%s\n" \
+			"$1" "${ALL_CFG[*]}"
+		exit
+	fi
+}	# buffer for find_position cause if options dont exist itll copy
+	# the first element. may have to work to get this buff inserted
+	# on find_position itself.
+
+copy_file() {
+	buff_find $1
+
+	CP_DIR=$CFG_DIR/${ALL_CFG[$POS]}
+	CP_FILE=$CP_DIR/${CFG_FILE_NAMES[$POS]}
+	LOCAL_FILE=config/${ALL_CFG[$POS]}/${CFG_FILE_NAMES[$POS]}
+
+	cp -vf $CP_FILE $LOCAL_FILE
+
+	return 0
+
+}
+
+copy_all() {
+	cat << EOF
+	All files are going to be copied. If you didn't intend to do this
+	rerun this script with the name of a program as an argument or
+	give one of the avalibles now.
+	(Avalible: ${ALL_CFG[*]})
+EOF
+	read -p "Install all files (YES/no/[program])" OPTION
+	
+	case $OPTION in
+		yes|Yes|YES|y|Y|'')
+			for file in "${ALL_CFG[@]}"; do
+				copy_file $file
+			done
+			;;
+		no|No|NO|n|N)
+			break
+			;;
+		*)
+			copy_file $OPTION
+			;;
+	esac
+}
+
+usage() {
+	cat << EOF
+	copy2repo
+
+	./copy2repo [program]|all|list
+
+	Script to copy dotfiles from .config folder to repo folder.
+EOF
+}
+
+case $1 in
+	''|all)	copy_all ;;
+	zshrc)	cp -vf $HOME/.zshrc ./zshrc ;;
+	list)	echo "Avalible configs are ${ALL_CFG[*]}" ;;
+	*)	copy_file $1 ;;
+esac
+# Intended functionality: put one or more names, find that on the arrays and copy it.

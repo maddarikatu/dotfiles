@@ -7,4 +7,3 @@ PDFVIEWER=zathura
 TEXMFDIST=/usr/share/texmf-dist
 
 APUNTES=$HOME/Documentos/apuntes
-2022-1=$APUNTES/2022-1
