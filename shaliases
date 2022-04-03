@@ -128,3 +128,7 @@ alias x="startx"
 
 # Run pridefetch with the bisexual flag by default
 alias pridefetch="/usr/local/bin/pridefetch -f demiboy"
+
+# Run LF with the lfimg script (https://github.com/cirala/lfimg)
+alias lf="$HOME/.local/bin/lfrun"
+alias lf-base="/usr/bin/lf"
