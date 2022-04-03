@@ -127,4 +127,4 @@ alias mkcfg="rm config.h; make config.h"
 alias x="startx"
 
 # Run pridefetch with the bisexual flag by default
-alias pridefetch="/usr/local/bin/pridefetch -f bisexual"
+alias pridefetch="/usr/local/bin/pridefetch -f demiboy"

@@ -14,10 +14,6 @@ super + Escape
 # bspwm hotkeys
 #
 
-# suspend
-super + shift + z
-	sudo zzz
-
 # quit/restart bspwm
 super + {r, alt + q}
 	bspc {wm -r,quit}
@@ -162,12 +158,17 @@ XF86MonBrightnessDown
 XF86MonBrightnessUp
 	sudo xbacklight -inc 15
 
+# mute mic
+XF86AudioMicMute
+	amixer set Capture toggle
+
 # screenshot
 Print
 	gscreenshot
 #	scrot '/home/fede/Imágenes/scrot-%Y-%m-%d_%H-%m-%s_$wx$h.png'
 
-#shift + Print
+shift + Print
+	gscreenshot -cs
 #	sh /home/fede/.local/bin/tirapantallas
 
 #lock session
@@ -185,7 +186,7 @@ super + o ; i
 	alacritty -e nvim
 
 super + o ; u
-	alacritty -e "ranger"
+	alacritty -e "lf"
 
 # polybar
 # super + z
