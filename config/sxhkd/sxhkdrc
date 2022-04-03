@@ -186,7 +186,7 @@ super + o ; i
 	alacritty -e nvim
 
 super + o ; u
-	alacritty -e "lf"
+	alacritty -e $HOME/.local/bin/lfrun
 
 # polybar
 # super + z
