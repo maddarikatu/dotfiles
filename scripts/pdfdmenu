@@ -1,0 +1,9 @@
+#!/bin/bash
+
+VIEWER=zathura
+FINDDIRS="$HOME/Documentos $HOME/Descargas $HOME/mountpoint $HOME/Emergencia"
+CACHEFILE=$HOME/.local/lib/libpdfdmenu
+find $FINDDIRS -type f -name "*.pdf" > $CACHEFILE
+SELECTED=$(sed 's/.*\///' $CACHEFILE | sort | dmenu)
+
+[[ $SELECTED == '' ]] || $VIEWER "$(find $HOME -name "$SELECTED")"

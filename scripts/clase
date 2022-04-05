@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# Válido por cuatrimestres, cambiar cuando eso
+
+FM=lf
+
+APUNTES=$HOME/Documentos/apuntes
+CUATRI=$APUNTES/2022-1
+
+ARTE=Arte\ y\ cultura\ en\ la\ edad\ contemporánea
+MOVIMIENTOS=Movimientos\ sociales\ y\ revoluciones\ en\ la\ historia
+PATRIMONIO=Patrimonio\ rural\ y\ urbano
+PLANIFICACION=Planificación\ y\ gestión\ de\ proyectos
+TIC=TIC\ para\ la\ gestión
+
+case $(date "+%a") in
+	lun)	$FM $CUATRI/$TIC ;;
+	mar)	
+		[ $(date "+%H") -lt 12 ] && exec $FM "$CUATRI/$ARTE"
+		[ $(date "+%H") -ge 12 ] && exec $FM "$CUATRI/$MOVIMIENTOS"
+		;;
+	mié)
+		[ $(date "+%H") -lt 10 ] && exec $FM "$CUATRI/"$PATRIMONIO"
+		[ $(date "+%H") -ge 10 ] && exec $FM "$CUATRI/"$PLANIFICACION"
+		;;
+	jue)
+		[ $(date "+%H") -lt 12 ] && exec $FM "$CUATRI/$ARTE"
+		[ $(date "+%H") -ge 12 ] && exec $FM "$CUATRI/$MOVIMIENTOS"
+		;;
+	vie)
+		[ $(date "+%H") -lt 12 ] && exec $FM "$CUATRI/$PATRIMONIO"
+		[ $(date "+%H") -ge 12 ] && exec $FM "$CUATRI/$PLANIFICACION"
+		;;
+	*)	echo $HOME ;;
+esac
