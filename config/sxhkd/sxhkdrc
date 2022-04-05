@@ -188,6 +188,9 @@ super + o ; i
 super + o ; u
 	alacritty -e $HOME/.local/bin/lfrun
 
+super + shift + d
+	/home/fede/.local/bin/pdfdmenu
+
 # polybar
 # super + z
 #	exec $HOME/.config/polybar/temp_launch.sh

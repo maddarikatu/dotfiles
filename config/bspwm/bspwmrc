@@ -18,6 +18,7 @@ bspc config border_radius	10
 # Start apps tiled or floating
 bspc rule -a Zathura state=tiled
 bspc rule -a Gscreenshot rectangle=700x600+610+240 state=floating focus=on
+# bspc rule -a Virt-manager rectangle=400x600+760+240 state=floating focus=on
 
 # Configuration
 setxkbmap es &
@@ -25,7 +26,7 @@ xinput set-prop "ETPS/2 Elantech Touchpad" "libinput Tapping Enabled" 1 &
 xsetroot -cursor_name left_ptr &
 
 # Autostart programs
-feh --bg-fill --randomize $HOME/Imágenes/.bg/* &
+feh --bg-fill --randomize $HOME/Imágenes/.bg/*.{jpeg,jpg,png} &
 exec bspwmbar &
 exec picom &
 exec blueman-applet &
