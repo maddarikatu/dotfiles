@@ -66,3 +66,14 @@ acst() {
 	exec acestream-launcher --player mpv $ID
 	return 0
 } # Open acestream from IDs instead of typing the whole thing
+
+scriptinit() {
+	FILE=$1
+	cat << EOF > $FILE
+#!/bin/bash
+
+
+EOF
+	chmod +x $FILE
+	$EDITOR $FILE
+} # create a bash script with a shebag, make it executable and open with the editor
