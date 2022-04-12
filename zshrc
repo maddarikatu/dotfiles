@@ -27,3 +27,7 @@ bindkey -v
 source $HOME/git/dotfiles/shaliases
 source $HOME/git/dotfiles/shfuncs
 source $HOME/git/dotfiles/shvars
+
+# https://aur.archlinux.org/zsh-theme-powerlevel10k-git.git
+source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme

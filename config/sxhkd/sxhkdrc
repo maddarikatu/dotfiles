@@ -146,6 +146,10 @@ XF86AudioLowerVolume
 XF86AudioRaiseVolume
 	amixer sset Master 10%+
 
+# mute mic
+XF86AudioMicMute
+	amixer set Capture toggle
+
 #
 # brightness
 #
@@ -157,10 +161,6 @@ XF86MonBrightnessDown
 # br up
 XF86MonBrightnessUp
 	sudo xbacklight -inc 15
-
-# mute mic
-XF86AudioMicMute
-	amixer set Capture toggle
 
 # screenshot
 Print

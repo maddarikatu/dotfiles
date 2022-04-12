@@ -6,7 +6,7 @@ call plug#begin('$HOME/.local/share/nvim/plugged')
 Plug 'mhinz/vim-startify'
 Plug 'preservim/nerdtree'
 Plug 'sickill/vim-monokai'
-Plug 'tc50cal/vim-terminal'
+Plug 'arcticicestudio/nord-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -17,4 +17,5 @@ map <F5> :NERDTreeToggle<CR>
 
 let g:airline_powerline_fonts = 1
 syntax enable
-colorscheme monokai
+colorscheme nordic "monokai
+set number
