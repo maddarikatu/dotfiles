@@ -9,8 +9,8 @@
 DOTF_DIR=$HOME/git/dotfiles
 CFG_DIR=$HOME/.config
 
-ALL_CFG=(alacritty bspwm i3 nvim picom polybar sxhkd)
-CFG_FILE_NAMES=(alacritty.yml bspwmrc config init.vim picom.conf config sxhkdrc)
+ALL_CFG=(alacritty awesome bspwm i3 nvim picom polybar sxhkd)
+CFG_FILE_NAMES=(alacritty.yml rc.lua bspwmrc config init.vim picom.conf config sxhkdrc)
 
 find_position() {
 	local i=0;
