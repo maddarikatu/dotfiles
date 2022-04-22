@@ -21,7 +21,6 @@ alias also="grep --color=never \"alias \" $HOME/git/dotfiles/shaliases"
 # # #	OPEN PROGRAMS
 # open nvim
 alias v=nvim
-alias vim=nvim
 
 # # #	PACKAGE MANAGER COMMANDS
 # sync and update pacman packages
@@ -132,3 +131,6 @@ alias pridefetch="/usr/local/bin/pridefetch -f demiboy"
 # Run LF with the lfimg script (https://github.com/cirala/lfimg)
 alias lf="$HOME/.local/bin/lfrun"
 alias lf-base="/usr/bin/lf"
+
+# Run Nut
+alias nut="python3 /home/fede/repos/nut/nut_gui.py"

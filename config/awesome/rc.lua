@@ -76,6 +76,7 @@ editor = os.getenv("EDITOR") or "nvim"
 filemanager = os.getenv("FILEMANAGER") or "lf"
 editor_cmd = terminal .. " -e " .. editor
 filemanager_cmd = terminal .. " -e " .. filemanager
+browser = "qutebrowser"
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -200,7 +201,7 @@ awful.screen.connect_for_each_screen(function(s)
 
     -- Each screen has its own tag table.
     --awful.tag({ " [1] ", " [2] ", " [3] ", " [4] ", " [5] ", " [6] " }, s, awful.layout.layouts[1])
-    awful.tag({ " [] ", " [] ", " [] ", " [ﭮ] ", " [] ", " [] " }, s, awful.layout.layouts[1])
+    awful.tag({ " [] ", " [] ", " [] ", " [] ", " [] ", " [ﭮ] " }, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -358,7 +359,7 @@ globalkeys = gears.table.join(
 
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
-              {description = "open a terminal", group = "launcher"}),
+              {description = "open a terminal (alacritty)", group = "launcher"}),
     awful.key({ modkey, "Control" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit,
@@ -382,16 +383,18 @@ globalkeys = gears.table.join(
               {description = "select previous", group = "layout"}),
 
     -- Start programs
-    awful.key({ modkey,           }, "t", function () awful.util.spawn("firefox") end,
-              {description = "open a Firefox", group = "apps"}),
+    awful.key({ modkey,           }, "t", function () awful.util.spawn(browser) end,
+              {description = "open a browser", group = "apps"}),
     awful.key({ modkey,           }, "y", function () awful.util.spawn("lowriter") end,
-              {description = "open a LibreOffice Writer", group = "apps"}),
+              {description = "open LibreOffice Writer", group = "apps"}),
     awful.key({ modkey,           }, "u", function () awful.spawn(filemanager_cmd) end,
-              {description = "open a file manager", group = "apps"}),
+              {description = "open file manager", group = "apps"}),
+    awful.key({ modkey, "Shift"   }, "u", function () awful.spawn(filemanager_cmd .. "~/.config") end,
+              {description = "open .config folder on file manager", group = "apps"}),
     awful.key({ modkey,           }, "i", function () awful.spawn(editor_cmd) end,
-              {description = "open an editor", group = "apps"}),
+              {description = "open an editor (nvim)", group = "apps"}),
     awful.key({ }, "Print", function() awful.util.spawn("gscreenshot") end,
-              {description = "take a screenshot", group = "apps"}),
+              {description = "take a screenshot (Gscreenshot)", group = "apps"}),
     
     -- Fn Keys
     awful.key({ }, "XF86AudioMute", function () volume_widget:toggle() end,
@@ -608,6 +611,20 @@ awful.rules.rules = {
     { rule = { class = "firefox" },
       properties = { opacity = 1, maximized = false, floating = false } },
 
+    -- Start Libre Office Writer tiled
+    { rule = { class = "libreoffice-writer" },
+      properties = { opacity = 1, maximized = false, floating = false } },
+
+    -- Start Discord floating
+    { rule = { class = "discord" },
+      properties = { opacity = 1,
+      	             tiled = false,
+		     floating = true,
+		     tag = " [ﭮ] ",
+		     width = 1366,
+		     height = 768,
+		     placement = awful.placement.centered } },
+
     -- Start Gscreenshot floating
     { rule = { class = "Gscreenshot" },
       properties = { opacity = 1, tiled = false, floating = true,
@@ -690,5 +707,6 @@ beautiful.useless_gap = 7
 --config startup commands
 os.execute("xinput set-prop 'ETPS/2 Elantech Touchpad' 'libinput Tapping Enabled' 1")
 os.execute("setxkbmap es")
-awful.spawn.with_shell("feh --randomize --bg-scale /home/fede/Imágenes/.bg/*.{jpeg,jpg,png}")
+awful.spawn.with_shell("feh --randomize --bg-fill /home/fede/Imágenes/.bg/*.{jpeg,jpg,png}")
 awful.spawn.with_shell("picom &")
+awful.util.spawn("discord")

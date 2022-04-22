@@ -77,3 +77,9 @@ EOF
 	chmod +x $FILE
 	$EDITOR $FILE
 } # create a bash script with a shebag, make it executable and open with the editor
+
+nd() {
+	NAME=$1
+	mkdir $NAME
+	cd $NAME
+}
