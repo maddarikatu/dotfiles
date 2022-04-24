@@ -5,13 +5,13 @@
 
 # # #	EDIT SHELL FILES
 # edit zsh config file
-alias zcfg="vim $HOME/.zshrc"
+alias zcfg="nvim $HOME/.zshrc"
 # edit bash config file
-alias bcfg="vim $HOME/.bashrc"
+alias bcfg="nvim $HOME/.bashrc"
 # edit this file itself
-alias vals="vim $HOME/git/dotfiles/shaliases"
+alias vals="nvim $HOME/git/dotfiles/shaliases"
 # edit functions
-alias vfuncs="vim $HOME/git/dotfiles/shfuncs"
+alias vfuncs="nvim $HOME/git/dotfiles/shfuncs"
 
 # echo this file
 alias als="cat $HOME/git/dotfiles/shaliases"
