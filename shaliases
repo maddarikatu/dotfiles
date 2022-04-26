@@ -125,7 +125,7 @@ alias mkcfg="rm config.h; make config.h"
 # start X session from $HOME/.xinitrc
 alias x="startx"
 
-# Run pridefetch with the bisexual flag by default
+# Run pridefetch with the tumblr gay flag by default
 alias pridefetch="/usr/local/bin/pridefetch -f gay"
 
 # Run LF with the lfimg script (https://github.com/cirala/lfimg)

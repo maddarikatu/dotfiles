@@ -197,7 +197,7 @@ screen.connect_signal("property::geometry", set_wallpaper)
 
 awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
-    set_wallpaper(s)
+    --set_wallpaper(s)
 
     -- Each screen has its own tag table.
     --awful.tag({ " [1] ", " [2] ", " [3] ", " [4] ", " [5] ", " [6] " }, s, awful.layout.layouts[1])
@@ -219,7 +219,7 @@ awful.screen.connect_for_each_screen(function(s)
         filter  = awful.widget.taglist.filter.all,
         buttons = taglist_buttons,
 	style = {
-		bg_focus = "#1793d1",
+		bg_focus = "#81a1c1",
 		spacing = 10,
 		shape_focus = gears.shape.circle,
 		font = "nerdfonts"
@@ -232,7 +232,7 @@ awful.screen.connect_for_each_screen(function(s)
         filter  = awful.widget.tasklist.filter.currenttags,
         buttons = tasklist_buttons,
 	style = {
-		bg_focus = "#1793d1",
+		bg_focus = "#81a1c1",
 		align = "center",
 		tasklist_disable_icon = true,
 		shape = gears.shape.rounded_rect
@@ -360,6 +360,13 @@ globalkeys = gears.table.join(
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
               {description = "open a terminal (alacritty)", group = "launcher"}),
+    awful.key({ modkey, "Shift" }, "Return", function () awful.spawn(terminal, {
+	    tiled = false,
+	    floating = true,
+	    width = 800,
+	    height = 600,
+	    placement = awful.placement.centered,
+    }) end, { description = "open a terminal (alacritty)", group = "launcher"}),
     awful.key({ modkey, "Control" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit,
@@ -395,7 +402,9 @@ globalkeys = gears.table.join(
               {description = "open an editor (nvim)", group = "apps"}),
     awful.key({ }, "Print", function() awful.util.spawn("gscreenshot") end,
               {description = "take a screenshot (Gscreenshot)", group = "apps"}),
-    
+    awful.key({ modkey,           }, "v", function () awful.spawn("virt-manager") end,
+              {description = "start virt-manager (QEMU)", group = "apps" }),
+
     -- Fn Keys
     awful.key({ }, "XF86AudioMute", function () volume_widget:toggle() end,
               {description = "toggle mute", group = "fn keys" }),
@@ -620,7 +629,7 @@ awful.rules.rules = {
       properties = { opacity = 1,
       	             tiled = false,
 		     floating = true,
-		     tag = " [ﭮ] ",
+ 	             tag = " [ﭮ] ",
 		     width = 1366,
 		     height = 768,
 		     placement = awful.placement.centered } },
@@ -630,9 +639,17 @@ awful.rules.rules = {
       properties = { opacity = 1, tiled = false, floating = true,
         width = 800, height = 600, placement = awful.placement.centered } },
 
-    -- Set Firefox to always map on the tag named "2" on screen 1.
-    -- { rule = { class = "Firefox" },
-    --   properties = { screen = 1, tag = "2" } },
+    { rule = { class = "TelegramDesktop" },
+      properties = { opacity = 1, tiled = false, floating = true,
+        width = 1366, height = 768, placement = awful.placement.centered } },
+
+    { rule = { class = "Virt-manager" },
+      properties = { opacity = 1, tiled = false, floating = true,
+        width = 540, height = 720, placement = awful.placement.centered } },
+    
+    { rule = { class = "Komikku" },
+      properties = { opacity = 1, tiled = false, floating = true,
+        width = 960, height = 1280, placement = awful.placement.centered } },
 }
 -- }}}
 
@@ -709,4 +726,4 @@ os.execute("xinput set-prop 'ETPS/2 Elantech Touchpad' 'libinput Tapping Enabled
 os.execute("setxkbmap es")
 awful.spawn.with_shell("feh --randomize --bg-fill /home/fede/Imágenes/.bg/*.{jpeg,jpg,png}")
 awful.spawn.with_shell("picom &")
-awful.util.spawn("discord")
+awful.spawn("discord")
