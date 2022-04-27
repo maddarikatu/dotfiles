@@ -76,7 +76,7 @@ editor = os.getenv("EDITOR") or "nvim"
 filemanager = os.getenv("FILEMANAGER") or "lf"
 editor_cmd = terminal .. " -e " .. editor
 filemanager_cmd = terminal .. " -e " .. filemanager
-browser = "qutebrowser"
+browser = "firefox"
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -221,7 +221,9 @@ awful.screen.connect_for_each_screen(function(s)
 	style = {
 		bg_focus = "#81a1c1",
 		spacing = 10,
-		shape_focus = gears.shape.circle,
+		shape_focus = gears.shape.rounded_bar,
+		shape_border_width = 5,
+		shape_border_color = "#00000000",
 		font = "nerdfonts"
 	},
     }
@@ -235,8 +237,10 @@ awful.screen.connect_for_each_screen(function(s)
 		bg_focus = "#81a1c1",
 		align = "center",
 		tasklist_disable_icon = true,
-		shape = gears.shape.rounded_rect
-	}
+		shape = gears.shape.rounded_bar,
+		shape_border_width = 5,
+		shape_border_color = "#00000000",
+	},
     }
 
     -- Create the wibox
@@ -632,7 +636,9 @@ awful.rules.rules = {
  	             tag = " [ﭮ] ",
 		     width = 1366,
 		     height = 768,
-		     placement = awful.placement.centered } },
+		     placement = awful.placement.centered
+	     }
+     },
 
     -- Start Gscreenshot floating
     { rule = { class = "Gscreenshot" },
@@ -646,10 +652,17 @@ awful.rules.rules = {
     { rule = { class = "Virt-manager" },
       properties = { opacity = 1, tiled = false, floating = true,
         width = 540, height = 720, placement = awful.placement.centered } },
-    
+
     { rule = { class = "Komikku" },
-      properties = { opacity = 1, tiled = false, floating = true,
-        width = 960, height = 1280, placement = awful.placement.centered } },
+      properties = { opacity = 1,
+                     tiled = false,
+		     floating = true,
+		     width = 720,
+		     height = 800,
+		     titlebars_enabled = false,
+		     placement = awful.placement.centered
+	     }
+     },
 }
 -- }}}
 

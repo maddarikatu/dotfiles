@@ -74,13 +74,13 @@ scriptinit() {
 		case $(echo $1 | sed 's/.*\.//') in
 			'py' ) INTERPRETER=python ;;
 			'lua' ) INTERPRETER=lua ;;
-			'sh' ) INTERPRETER=bash ;;
+			''|'bash' ) INTERPRETER=bash ;;
+			'sh') printf "#!/bin/sh\n\n" > $FILE && chmod +x $FILE && $EDITOR $FILE && break ;;
 			'pl' ) INTERPRETER=perl ;;
 		esac
 	else
 		INTERPRETER=$2
 	fi
-	[[ $INTERPRETER == '' ]] && INTERPRETER=bash
 	cat << EOF > $FILE
 #!/usr/bin/env $INTERPRETER
 
