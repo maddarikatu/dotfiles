@@ -71,7 +71,7 @@ acst() {
 scriptinit() {
 	FILE=$1
 	if [[ $2 == '' ]]; then
-		case $(echo $1 | sed 's/.*\.//') in
+		case $(sed 's/.*\.//' <<<$1) in
 			'py' ) INTERPRETER=python ;;
 			'lua' ) INTERPRETER=lua ;;
 			''|'bash' ) INTERPRETER=bash ;;
@@ -80,7 +80,7 @@ scriptinit() {
 	elif [[ $2 == 'sh' ]]; then
 		printf "#!/bin/sh\n\n" > $FILE
 		chmod +x $FILE
-		$EDITOR $FILE && break
+		$EDITOR $FILE && return 0
 	else
 		INTERPRETER=$2
 	fi
