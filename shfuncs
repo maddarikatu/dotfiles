@@ -75,9 +75,12 @@ scriptinit() {
 			'py' ) INTERPRETER=python ;;
 			'lua' ) INTERPRETER=lua ;;
 			''|'bash' ) INTERPRETER=bash ;;
-			'sh') printf "#!/bin/sh\n\n" > $FILE && chmod +x $FILE && $EDITOR $FILE && break ;;
 			'pl' ) INTERPRETER=perl ;;
 		esac
+	elif [[ $2 == 'sh' ]]; then
+		printf "#!/bin/sh\n\n" > $FILE
+		chmod +x $FILE
+		$EDITOR $FILE && break
 	else
 		INTERPRETER=$2
 	fi

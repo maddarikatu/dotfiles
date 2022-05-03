@@ -73,7 +73,7 @@ beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 -- This is used later as the default terminal and editor to run.
 terminal = "alacritty"
 editor = os.getenv("EDITOR") or "nvim"
-filemanager = os.getenv("FILEMANAGER") or "lf"
+filemanager = os.getenv("HOME").."/.local/bin/lfrun"
 editor_cmd = terminal .. " -e " .. editor
 filemanager_cmd = terminal .. " -e " .. filemanager
 browser = "firefox"
@@ -281,7 +281,9 @@ awful.screen.connect_for_each_screen(function(s)
 		    step_spacing = 2,
 	    }),
 	    text_separator_middle,
-	    ram_widget(),
+	    ram_widget({
+		    color_used = '#bf616a',
+	    }),
 	    text_separator_middle,
 	    battery_widget{
 		    ac = "AC",
@@ -395,6 +397,8 @@ globalkeys = gears.table.join(
 
     -- Start programs
     awful.key({ modkey,           }, "t", function () awful.util.spawn(browser) end,
+              {description = "open a browser", group = "apps"}),
+    awful.key({ modkey, "Shift"   }, "t", function () awful.util.spawn("firefox --private-window") end,
               {description = "open a browser", group = "apps"}),
     awful.key({ modkey,           }, "y", function () awful.util.spawn("lowriter") end,
               {description = "open LibreOffice Writer", group = "apps"}),
@@ -633,8 +637,8 @@ awful.rules.rules = {
       properties = { opacity = 1,
       	             tiled = false,
 		     floating = true,
- 	             tag = " [ﭮ] ",
-		     width = 1366,
+		     tag = " [ﭮ] ",
+ 	             width = 1366,
 		     height = 768,
 		     placement = awful.placement.centered
 	     }
