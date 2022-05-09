@@ -201,7 +201,7 @@ awful.screen.connect_for_each_screen(function(s)
 
     -- Each screen has its own tag table.
     --awful.tag({ " [1] ", " [2] ", " [3] ", " [4] ", " [5] ", " [6] " }, s, awful.layout.layouts[1])
-    awful.tag({ " [] ", " [] ", " [] ", " [] ", " [] ", " [ﭮ] " }, s, awful.layout.layouts[1])
+    awful.tag({ " [] ", " [] ", " [] ", " [] ", " [] ", " [] " }, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -219,7 +219,7 @@ awful.screen.connect_for_each_screen(function(s)
         filter  = awful.widget.taglist.filter.all,
         buttons = taglist_buttons,
 	style = {
-		bg_focus = "#81a1c1",
+		bg_focus = "#bf616a",
 		spacing = 10,
 		shape_focus = gears.shape.rounded_bar,
 		shape_border_width = 5,
@@ -234,7 +234,7 @@ awful.screen.connect_for_each_screen(function(s)
         filter  = awful.widget.tasklist.filter.currenttags,
         buttons = tasklist_buttons,
 	style = {
-		bg_focus = "#81a1c1",
+		bg_focus = "#bf616a",
 		align = "center",
 		tasklist_disable_icon = true,
 		shape = gears.shape.rounded_bar,
@@ -282,7 +282,7 @@ awful.screen.connect_for_each_screen(function(s)
 	    }),
 	    text_separator_middle,
 	    ram_widget({
-		    color_used = '#bf616a',
+		    color_used = '#FF0000',
 	    }),
 	    text_separator_middle,
 	    battery_widget{
@@ -637,7 +637,7 @@ awful.rules.rules = {
       properties = { opacity = 1,
       	             tiled = false,
 		     floating = true,
-		     tag = " [ﭮ] ",
+		     tag = " [] ",
  	             width = 1366,
 		     height = 768,
 		     placement = awful.placement.centered
@@ -741,6 +741,7 @@ beautiful.useless_gap = 7
 --config startup commands
 os.execute("xinput set-prop 'ETPS/2 Elantech Touchpad' 'libinput Tapping Enabled' 1")
 os.execute("setxkbmap es")
-awful.spawn.with_shell("feh --randomize --bg-fill /home/fede/Imágenes/.bg/*.{jpeg,jpg,png}")
+awful.spawn.with_shell("feh --randomize --bg-fill /home/fede/Imágenes/.bg/allp_nord.png") --theme wallpaper
+-- awful.spawn.with_shell("feh --randomize --bg-fill /home/fede/Imágenes/.bg/*.{jpeg,jpg,png}") --random wallpaper
 awful.spawn.with_shell("picom &")
 awful.spawn("discord")
