@@ -133,4 +133,7 @@ alias lf="$HOME/.local/bin/lfrun"
 alias lf-base="/usr/bin/lf"
 
 # Run Nut
-alias nut="python3 /home/fede/repos/nut/nut_gui.py"
+alias nut="python3 $HOME/repos/nut/nut_gui.py"
+
+# copy tex template
+alias textl="cp $HOME/Documentos/template.tex"

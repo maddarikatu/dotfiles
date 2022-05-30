@@ -50,14 +50,20 @@ nnoremap <silent> <Leader>fb :DashboardJumpMark<CR>
 nnoremap <silent> <Leader>cn :DashboardNewFile<CR>
 
 " tex mappings
-if &filetype ==# 'tex'
+if &filetype == 'tex'
   set wrap linebreak
   map <C-s> <ESC>:w<Return>
 " insert mode
-  imap <C-e> \emph{}<ESC>i
-  imap <C-b> \textbf{}<ESC>i
-  imap <C-k> \title{}<ESC>i
-  imap <C-l> \chapter{}<ESC>i
-  imap <C-z> \section*{}<ESC>i
-  imap <C-v> \subsection*{}<ESC>i
+  imap <C-a>i \emph{}<ESC>i
+  imap <C-a>b \textbf{}<ESC>i
+  imap <C-a>t \title{}<ESC>i
+  imap <C-a>c \section{}<ESC>i
+  imap <C-a>s \section*{}<ESC>i
+  imap <C-a>k \subsection*{}<ESC>i
+" visual mode
+  vmap <C-a>i xi<C-a>i<ESC>p
+  vmap <C-a>b xi<C-a>b<ESC>p
+  vmap <C-a>t xi<C-a>t<ESC>p
+  vmap <C-a>s xi<C-a>s<ESC>p
+  vmap <C-a>k xi<C-a>k<ESC>p
 endif
