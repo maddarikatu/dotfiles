@@ -3,7 +3,7 @@
 # shfuncs.
 # Shell function dumpster (Source on shell's .rc).
 
-DOTFDIR=$HOME/git/dotfiles
+DOTFDIR=$HOME/code/git/dotfiles
 VALS=$DOTFDIR/shaliases
 
 aliasadd() {
@@ -70,17 +70,17 @@ acst() {
 
 scriptinit() {
 	FILE=$1
-	if [[ $2 == '' ]]; then
+	if [[ $2 == 'sh' ]]; then
+		printf "#!/bin/sh\n\n" > $FILE
+		chmod +x $FILE
+		$EDITOR $FILE && return 0
+	elif [ $# == 1 ]; then
 		case $(sed 's/.*\.//' <<<$1) in
 			'py' ) INTERPRETER=python ;;
 			'lua' ) INTERPRETER=lua ;;
 			''|'bash' ) INTERPRETER=bash ;;
 			'pl' ) INTERPRETER=perl ;;
 		esac
-	elif [[ $2 == 'sh' ]]; then
-		printf "#!/bin/sh\n\n" > $FILE
-		chmod +x $FILE
-		$EDITOR $FILE && return 0
 	else
 		INTERPRETER=$2
 	fi
