@@ -1,6 +1,5 @@
 " curl vimplug
-" sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-"      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+" sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
 call plug#begin('$HOME/.local/share/nvim/plugged')
 "Plug 'mhinz/vim-startify'
@@ -8,6 +7,7 @@ call plug#begin('$HOME/.local/share/nvim/plugged')
 Plug 'preservim/nerdtree'
 Plug 'sickill/vim-monokai'
 Plug 'arcticicestudio/nord-vim'
+Plug 'B4mbus/oxocarbon-lua.nvim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -23,13 +23,17 @@ Plug 'nvim-telescope/telescope-fzf-native.nvim'
 Plug 'nvim-treesitter/nvim-treesitter'
 call plug#end()
 
+filetype on
+
 map <F5> :NERDTreeToggle<CR>
 "autocmd VimEnter * NERDTree | wincmd p
 
 let g:airline_powerline_fonts = 1
 syntax enable
-colorscheme nordic
+colorscheme oxocarbon-lua
 set number
+
+let g:tex_flavour = "latex"
 
 " system clipboard
 set clipboard=unnamedplus
@@ -50,7 +54,7 @@ nnoremap <silent> <Leader>fb :DashboardJumpMark<CR>
 nnoremap <silent> <Leader>cn :DashboardNewFile<CR>
 
 " tex mappings
-if &filetype == 'tex'
+function! TexBind()
   set wrap linebreak
   map <C-s> <ESC>:w<Return>
 " insert mode
@@ -60,10 +64,31 @@ if &filetype == 'tex'
   imap <C-a>c \section{}<ESC>i
   imap <C-a>s \section*{}<ESC>i
   imap <C-a>k \subsection*{}<ESC>i
+  imap " ``''<ESC>2ha
 " visual mode
   vmap <C-a>i xi<C-a>i<ESC>p
   vmap <C-a>b xi<C-a>b<ESC>p
   vmap <C-a>t xi<C-a>t<ESC>p
   vmap <C-a>s xi<C-a>s<ESC>p
   vmap <C-a>k xi<C-a>k<ESC>p
-endif
+endfunction
+
+function! MdBind()
+	set wrap linebreak
+	map <C-s> <ESC>:w<Return>
+	" insert mode
+	imap <C-a>i **<ESC>hi
+	imap <C-a>b ****<ESC>hhi
+	imap <C-a>t #
+	imap <C-a>c ##
+	imap <C-a>k ###
+	" visual mode
+	vmap <C-a>i xi<C-a>i<ESC>p
+	vmap <C-a>b xi<C-a>b<ESC>p
+	vmap <C-a>t xi<C-a>t<ESC>p
+	vmap <C-a>k xi<C-a>k<ESC>p
+endfunction
+
+autocmd FileType tex call TexBind()
+autocmd FileType markdown call MdBind()
+autocmd BufWritePost *.tex execute "!pdflatex %"

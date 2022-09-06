@@ -3,6 +3,7 @@
 # shfuncs.
 # Shell function dumpster (Source on shell's .rc).
 
+CFG=$HOME/.zshrc
 DOTFDIR=$HOME/code/git/dotfiles
 VALS=$DOTFDIR/shaliases
 
@@ -10,10 +11,14 @@ aliasadd() {
 	if [[ ! $1 == '' ]]; then
 		name=$1
 	else
-		read -p "Alias name: " name
+		printf "Alias name: "
+		read name
 	fi
-	read -p "Alias function: " func
-	read -p "(Optional) Function description: " desc
+
+	printf "Alias function: "
+	read func
+	printf "(Optional) Functional description: "
+	read desc
 	
 	if [[ ! $desc == '' ]]; then
 		printf "\n# %s\nalias %s=\"%s\"\n" "$desc" "$name" "$func" >> $VALS
@@ -22,6 +27,8 @@ aliasadd() {
 		printf "\nalias %s=\"%s\"\n" "$name" "$func" >> $VALS
 		return 0
 	fi
+
+	source $CFG
 } # Add an alias
 
 aliasdel() {
@@ -45,6 +52,8 @@ aliasdel() {
 		sed "s/$DELETE//" $VALS
 	fi
 	return 0
+
+	source $CFG
 } # Delete an alias
 
 wtar() {
