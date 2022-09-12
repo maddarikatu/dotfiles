@@ -109,3 +109,7 @@ nd() {
 	cd $NAME
 	return 0
 }
+
+tarless() {
+	tar atf $1 | less
+}
