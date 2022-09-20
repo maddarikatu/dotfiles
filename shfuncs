@@ -113,3 +113,7 @@ nd() {
 tarless() {
 	tar atf $1 | less
 }
+
+ipcow() {
+	printf "%i.%i.%i.%i\n" `shuf -n4 -i0-255` | cowsay
+}

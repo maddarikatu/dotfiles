@@ -149,3 +149,9 @@ alias glow="/usr/bin/glow -p"
 
 # Open zsh history file
 alias zhist="nvim $HOME/.zhistfile"
+
+# Open awesome config directory
+alias aw="cd $HOME/.config/awesome"
+
+# Open awesome config file
+alias awf="nvim $HOME/.config/awesome/rc.lua"
