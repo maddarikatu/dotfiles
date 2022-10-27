@@ -23,11 +23,12 @@ local battery_widget = require("battery-widget")
 -- awesome-wm-widgets (https://github.com/streetturtle/awesome-wm-widgets)
 local brightness_widget = require("awesome-wm-widgets.brightness-widget.brightness")
 local volume_widget = require("awesome-wm-widgets.volume-widget.volume")
-local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
-local ram_widget = require("awesome-wm-widgets.ram-widget.ram-widget")
+--local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
+--local ram_widget = require("awesome-wm-widgets.ram-widget.ram-widget")
+local logout_popup = require("awesome-wm-widgets.logout-popup-widget.logout-popup")
 -- net_widgets (https://github.com/pltanton/net_widgets)
 local net_widgets = require("net_widgets")
-net_wireless = net_widgets.wireless({
+local net_wireless = net_widgets.wireless({
 	interfaces={
 		"wlp0s20f3",
 		"enp4s0",
@@ -36,9 +37,19 @@ net_wireless = net_widgets.wireless({
 })
 --net_wired = net_widgets.indicator({interface="enp4s0", timeout=5})
 
-text_separator_left = wibox.widget.textbox("  [  ")
-text_separator_middle = wibox.widget.textbox("  ] [  ")
-text_separator_right = wibox.widget.textbox("  ]  ")
+local text_separator_left = wibox.widget.textbox("  [  ")
+local text_separator_middle = wibox.widget.textbox("  |  ")
+local text_separator_right = wibox.widget.textbox("  ]  ")
+
+function os.capture(cmd)
+	local f = assert(io.popen(cmd, 'r'))
+	local s = assert(f:read('*a'))
+	f:close()
+	return s
+end
+
+local package_count_cmd = os.capture("pacman -Qu | wc -l")
+local package_count = wibox.widget.textbox(" " .. package_count_cmd)
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -71,12 +82,13 @@ beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 --beautiful.init(os.getenv("HOME") .. ".config/awesome/themes/nordic-awesome/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "alacritty"
-editor = os.getenv("EDITOR") or "nvim"
-filemanager = os.getenv("HOME").."/.local/bin/lfrun"
-editor_cmd = terminal .. " -e " .. editor
-filemanager_cmd = terminal .. " -e " .. filemanager
-browser = "firefox"
+local terminal = "alacritty"
+local editor = os.getenv("EDITOR") or "nvim"
+local filemanager = os.getenv("HOME").."/.local/bin/lfrun"
+local editor_cmd = terminal .. " -e " .. editor
+local filemanager_cmd = terminal .. " -e " .. filemanager
+local browser = "qutebrowser"
+local browser_alt = "firefox"
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -87,8 +99,8 @@ modkey = "Mod4"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
-    awful.layout.suit.fair,
     awful.layout.suit.tile,
+    awful.layout.suit.fair,
     awful.layout.suit.floating,
     awful.layout.suit.max.fullscreen,
     awful.layout.suit.spiral,
@@ -260,8 +272,8 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             wibox.widget.systray(),
 	    text_separator_left,
-            mykeyboardlayout,
-	    text_separator_middle,
+--          mykeyboardlayout,
+--	    text_separator_middle,
 	    brightness_widget{
 		    type = 'icon_and_text',
 		    program = 'xbacklight',
@@ -275,7 +287,9 @@ awful.screen.connect_for_each_screen(function(s)
 		    device = "pulse"
 	    },
 	    text_separator_middle,
-	    cpu_widget({
+	    package_count,
+	    text_separator_middle,
+--[[	    cpu_widget({
 		    width = 30,
 		    step_width = 3,
 		    step_spacing = 2,
@@ -285,14 +299,16 @@ awful.screen.connect_for_each_screen(function(s)
 		    color_used = '#FF0000',
 	    }),
 	    text_separator_middle,
+]]--
 	    battery_widget{
 		    ac = "AC",
 		    adapter = "BAT0",
 		    widget_font = "Inconsolata",
-		    widget_text = " ${AC_BAT}${color_on}${percent}%${color_off}",
+--		    widget_text = " ${AC_BAT}${color_on}${percent}%${color_off}",
+		    widget_text = " ${color_on}${percent}%${color_off}",
 		    percent_colors = {
 			    { 15, "red" },
-			    { 40, "orange" },
+			    { 27, "orange" },
 			    { 999, "green" },
 		    },
 		    tooltip_text = "Battery ${state}${time_est}\nCapacity: ${capacity_percent}%",
@@ -303,6 +319,7 @@ awful.screen.connect_for_each_screen(function(s)
 	    text_separator_middle,
             mytextclock,
 	    text_separator_right,
+	    logout_popup.widget{},
             s.mylayoutbox
         },
     }
@@ -375,7 +392,7 @@ globalkeys = gears.table.join(
     }) end, { description = "open a terminal (alacritty)", group = "launcher"}),
     awful.key({ modkey, "Control" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
-    awful.key({ modkey, "Shift"   }, "q", awesome.quit,
+    awful.key({ modkey, "Shift"   }, "q", logout_popup.launch,
               {description = "quit awesome", group = "awesome"}),
 
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)          end,
@@ -397,14 +414,14 @@ globalkeys = gears.table.join(
 
     -- Start programs
     awful.key({ modkey,           }, "t", function () awful.util.spawn(browser) end,
-              {description = "open a browser", group = "apps"}),
-    awful.key({ modkey, "Shift"   }, "t", function () awful.util.spawn("firefox --private-window") end,
-              {description = "open a browser", group = "apps"}),
+              {description = "open browser", group = "apps"}),
+    awful.key({ modkey, "Shift"   }, "t", function () awful.util.spawn(browser_alt) end,
+              {description = "open alternate browser", group = "apps"}),
     awful.key({ modkey,           }, "y", function () awful.util.spawn("lowriter") end,
               {description = "open LibreOffice Writer", group = "apps"}),
     awful.key({ modkey,           }, "u", function () awful.spawn(filemanager_cmd) end,
               {description = "open file manager", group = "apps"}),
-    awful.key({ modkey, "Shift"   }, "u", function () awful.spawn(filemanager_cmd .. "~/.config") end,
+    awful.key({ modkey, "Shift"   }, "u", function () awful.spawn(filemanager_cmd .. " /home/fede/.config") end,
               {description = "open .config folder on file manager", group = "apps"}),
     awful.key({ modkey,           }, "i", function () awful.spawn(editor_cmd) end,
               {description = "open an editor (nvim)", group = "apps"}),
@@ -412,6 +429,8 @@ globalkeys = gears.table.join(
               {description = "take a screenshot (Gscreenshot)", group = "apps"}),
     awful.key({ modkey,           }, "v", function () awful.spawn("virt-manager") end,
               {description = "start virt-manager (QEMU)", group = "apps" }),
+    awful.key({ modkey, "Shift"   }, "f", function () awful.spawn(os.getenv('HOME') .. "/.local/bin/furbo play") end,
+              {description = "acestream dmenu", group = "scripts" }),
 
     -- Fn Keys
     awful.key({ }, "XF86AudioMute", function () volume_widget:toggle() end,
@@ -442,7 +461,7 @@ globalkeys = gears.table.join(
     -- Prompt
     --[[awful.key({ modkey },            "r",     function () awful.screen.focused().mypromptbox:run() end,
               {description = "run prompt", group = "launcher"}),]]--
-    awful.key({ modkey },            "r",     function () awful.spawn("dmenu_run") end,
+    awful.key({ modkey },            "r",     function () awful.spawn("j4-dmenu-desktop") end,
               {description = "run dmenu", group = "launcher"}),
 
     awful.key({ modkey }, "x",
@@ -699,7 +718,7 @@ client.connect_signal("request::titlebars", function(c)
         end)
     )
 
-    awful.titlebar(c) : setup {
+    awful.titlebar(c, { position = "left" } ) :setup {
         { -- Left
             awful.titlebar.widget.iconwidget(c),
             buttons = buttons,
@@ -736,12 +755,11 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- }}}
 
 -- gaps
-beautiful.useless_gap = 7
+beautiful.useless_gap = 12
 
 --config startup commands
 os.execute("xinput set-prop 'ETPS/2 Elantech Touchpad' 'libinput Tapping Enabled' 1")
-os.execute("setxkbmap es")
-awful.spawn.with_shell("feh --randomize --bg-fill /home/fede/Imágenes/.bg/allp_nord.png") --theme wallpaper
+gears.wallpaper.maximized("/home/fede/docs/pics/.bg/mar2.jpg", s) --set wallpaper
 -- awful.spawn.with_shell("feh --randomize --bg-fill /home/fede/Imágenes/.bg/*.{jpeg,jpg,png}") --random wallpaper
 awful.spawn.with_shell("picom &")
-awful.spawn("discord")
+awful.spawn("discord-canary")

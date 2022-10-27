@@ -77,7 +77,7 @@ acst() {
 	return 0
 } # Open acestream from IDs instead of typing the whole thing
 
-scriptinit() {
+scr() {
 	FILE=$1
 	if [[ $2 == 'sh' ]]; then
 		printf "#!/bin/sh\n\n" > $FILE

@@ -32,6 +32,7 @@ let g:airline_powerline_fonts = 1
 syntax enable
 colorscheme oxocarbon-lua
 set number
+set mouse+=a
 
 let g:tex_flavour = "latex"
 
@@ -62,15 +63,18 @@ function! TexBind()
   imap <C-a>b \textbf{}<ESC>i
   imap <C-a>t \title{}<ESC>i
   imap <C-a>c \section{}<ESC>i
-  imap <C-a>s \section*{}<ESC>i
-  imap <C-a>k \subsection*{}<ESC>i
+  imap <C-a>C \section*{}<ESC>i
+  imap <C-a>k \subsection{}<ESC>i
+  imap <C-a>K \subsection*{}<ESC>i
   imap " ``''<ESC>2ha
 " visual mode
   vmap <C-a>i xi<C-a>i<ESC>p
   vmap <C-a>b xi<C-a>b<ESC>p
   vmap <C-a>t xi<C-a>t<ESC>p
-  vmap <C-a>s xi<C-a>s<ESC>p
+  vmap <C-a>c xi<C-a>c<ESC>p
+  vmap <C-a>C xi<C-a>C<ESC>p
   vmap <C-a>k xi<C-a>k<ESC>p
+  vmap <C-a>K xi<C-a>K<ESC>p
 endfunction
 
 function! MdBind()

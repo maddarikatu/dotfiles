@@ -14,6 +14,8 @@ alias bcfg="nvim $HOME/.bashrc"
 alias vals="nvim $DOTF/shaliases"
 # edit functions
 alias vfuncs="nvim $DOTF/shfuncs"
+# edit variables
+alias vvars="nvim $DOTF/shvars"
 
 # echo this file
 alias als="cat $DOTF/shaliases"
@@ -27,38 +29,38 @@ alias v=nvim
 # # #	PACKAGE MANAGER COMMANDS
 # sync and update pacman packages
 alias upd="sudo pacman -Syu"
-# alias upd="sudo xbps-install -Su"
-# alias upd="sudo apt update && sudo apt upgrade"
-# upd and reboot
-alias updr="sudo pacman -Syu ; reboot"
-# alias updr="sudo xbps-install -Su ; reboot"
-# alias updr="sudo apt-update && sudo apt upgrade ; reboot"
+## alias upd="sudo xbps-install -Su"
+## alias upd="sudo apt update && sudo apt upgrade"
 # install with pacman
 alias pi="sudo pacman -S"
-# alias pi="sudo xbps-install -S"
-# alias pi="sudo apt install"
+## alias pi="sudo xbps-install -S"
+## alias pi="sudo apt install"
 # install from local .pkg.tar.zst
 alias pil="sudo pacman -U"
-# alias pil="sudo xbps-install --repository ."
-# alias pil="sudo dpkg -i"
+## alias pil="sudo xbps-install --repository ."
+## alias pil="sudo dpkg -i"
 # install from xbps-src
-# alias pil-src="sudo xbps-install --repository hostdir/binpkgs"
+## alias pil-src="sudo xbps-install --repository hostdir/binpkgs"
 # remove package and dependencies
 alias pr="sudo pacman -Rs"
-# alias pr="sudo xbps-remove -Ro"
-# alias pr="sudo apt-get purge"
+## alias pr="sudo xbps-remove -Ro"
+## alias pr="sudo apt-get purge"
 # remove orphans
 alias rm-orphs="pacman -Qtdq | sudo pacman -Rns -"
-# alias rm-orphs="sudo xbps-remove -O"
-# alias rm-orphs="sudo apt-get autoremove"
+## alias rm-orphs="sudo xbps-remove -O"
+## alias rm-orphs="sudo apt-get autoremove"
 # search from official repos
 alias psc="pacman -Ss"
-# alias psc="xbps-query -Rs"
-# alias psc="apt search"
+## alias psc="xbps-query -Rs"
+## alias psc="apt search"
 # search local packages
 alias pq="pacman -Q"
-# alias pq="xbps-query -s"
-# alias pq="apt list --installed"
+## alias pq="xbps-query -s"
+## alias pq="apt list --installed"
+# Sync pacman repositories
+alias psy="sudo pacman -Sy"
+# Install as dependency
+alias pi-dep="sudo pacman -S --asdeps"
 
 # sync and update AUR packages
 alias upds="paru -Syu"
@@ -124,6 +126,10 @@ alias cemakelcl="mkdir Build && cd Build && cmake .."
 alias cemake="mkdir Build && cd Build && cmake .. -DCMAKE_INSTALL_PREFIX=/usr"
 # make config.h for suckless style programs
 alias mkcfg="rm config.h; make config.h"
+# cargo build
+alias cgb="cargo build -j8"
+# cargo install
+alias cgi="cargo install"
 
 # start X session from $HOME/.xinitrc
 alias x="startx"
@@ -152,6 +158,10 @@ alias zhist="nvim $HOME/.zhistfile"
 
 # Open awesome config directory
 alias aw="cd $HOME/.config/awesome"
-
 # Open awesome config file
 alias awf="nvim $HOME/.config/awesome/rc.lua"
+
+# Sync pacman repositories
+alias psy="sudo pacman -Sy"
+# Install as dependency
+alias pi-dep="sudo pacman -S --asdeps"

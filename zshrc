@@ -31,13 +31,23 @@ unsetopt autocd extendedglob nomatch notify
 bindkey -v
 # End of lines configured by zsh-newuser-install
 
-source $HOME/git/dotfiles/shaliases
-source $HOME/git/dotfiles/shfuncs
-source $HOME/git/dotfiles/shvars
+DOTF=$HOME/code/git/dotfiles
+
+source $DOTF/shaliases
+source $DOTF/shfuncs
+source $DOTF/shvars
 
 # https://aur.archlinux.org/zsh-theme-powerlevel10k-git.git
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+[[ ! -f ~/.config/.p10k.zsh ]] || source ~/.config/.p10k.zsh
 
-source $HOME/.sshalias # separate alias to connect to ssh at home (my home's ip is in there)
+# archlinux community/zsh-syntax-highlighting
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# archlinux community/zsh-autosuggestions
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+tte
+
+source /home/fede/code/git/dotfiles/LF_ICONS
+
+export PKG_CONFIG_PATH=/usr/share/pkgconfig
