@@ -4,6 +4,7 @@
 call plug#begin('$HOME/.local/share/nvim/plugged')
 "Plug 'mhinz/vim-startify'
 "Plug 'goolord/alpha-nvim'
+Plug 'preservim/vim-lexical'
 Plug 'preservim/nerdtree'
 Plug 'sickill/vim-monokai'
 Plug 'arcticicestudio/nord-vim'
@@ -24,6 +25,8 @@ Plug 'nvim-treesitter/nvim-treesitter'
 call plug#end()
 
 filetype on
+let g:lexical#spelllang = ['es']
+let g:lexical#spell = 1
 
 map <F5> :NERDTreeToggle<CR>
 "autocmd VimEnter * NERDTree | wincmd p
@@ -34,7 +37,11 @@ colorscheme oxocarbon-lua
 set number
 set mouse+=a
 
-let g:tex_flavour = "latex"
+" fold
+set foldmethod=syntax
+set foldlevel=99
+
+"let g:tex_flavour = 'latex'
 
 " system clipboard
 set clipboard=unnamedplus
@@ -57,6 +64,7 @@ nnoremap <silent> <Leader>cn :DashboardNewFile<CR>
 " tex mappings
 function! TexBind()
   set wrap linebreak
+  let g:lexical#spell = 0
   map <C-s> <ESC>:w<Return>
 " insert mode
   imap <C-a>i \emph{}<ESC>i
@@ -94,5 +102,6 @@ function! MdBind()
 endfunction
 
 autocmd FileType tex call TexBind()
+autocmd FileType tex call lexical#init()
 autocmd FileType markdown call MdBind()
 autocmd BufWritePost *.tex execute "!pdflatex %"
