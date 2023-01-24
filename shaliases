@@ -80,7 +80,7 @@ alias ll="/usr/bin/ls -lh --color=auto --group-directories-first"
 # Get number of elements in a diretory
 alias howmany="ls | wc -l"
 # Get number of elements in a directory including hidden
-alias howmanyall="ls -a | wc -l"
+alias howmanyall="ls -A | wc -l"
 # Bunch of dirs
 alias bg="cd $HOME/docs/pics/.bg && ls"
 alias dw="cd $HOME/docs/downs && ls"
@@ -108,6 +108,8 @@ alias rcs="rc-service"
 # # #	GIT COMMANDS
 # clone git repo
 alias gcl="git clone"
+# gcl but recursive
+alias gclr="git clone --recursive"
 # add folder to git repo
 alias gad="git add ."
 # make commit to git repo
@@ -165,3 +167,9 @@ alias awf="nvim $HOME/.config/awesome/rc.lua"
 alias psy="sudo pacman -Sy"
 # Install as dependency
 alias pi-dep="sudo pacman -S --asdeps"
+
+# ed with prompt
+alias ed="/usr/bin/ed -v -p'ed> '"
+
+# run python3
+alias py="python3"
