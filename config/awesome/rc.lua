@@ -26,30 +26,28 @@ local volume_widget = require("awesome-wm-widgets.volume-widget.volume")
 --local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
 --local ram_widget = require("awesome-wm-widgets.ram-widget.ram-widget")
 local logout_popup = require("awesome-wm-widgets.logout-popup-widget.logout-popup")
+local calendar_widget = require("awesome-wm-widgets.calendar-widget.calendar")
+local cw = calendar_widget({
+		theme = 'dark',
+		placement = 'top_right'
+})
 -- net_widgets (https://github.com/pltanton/net_widgets)
 local net_widgets = require("net_widgets")
-local net_wireless = net_widgets.wireless({
+local net_wireless = net_widgets.indicator({
 	interfaces={
 		"wlp0s20f3",
 		"enp4s0",
 	},
-	timeout=15
+	timeout=5
 })
+local net_internet = net_widgets.internet({indent = 0, timeout = 5})
 --net_wired = net_widgets.indicator({interface="enp4s0", timeout=5})
 
-local text_separator_left = wibox.widget.textbox("  [  ")
-local text_separator_middle = wibox.widget.textbox("  |  ")
-local text_separator_right = wibox.widget.textbox("  ]  ")
+--local pacman_widget = require("awesome-pacman-widget.pacman")
 
-function os.capture(cmd)
-	local f = assert(io.popen(cmd, 'r'))
-	local s = assert(f:read('*a'))
-	f:close()
-	return s
-end
-
-local package_count_cmd = os.capture("pacman -Qu | wc -l")
-local package_count = wibox.widget.textbox(" " .. package_count_cmd)
+local text_separator_left = wibox.widget.textbox("   ")
+local text_separator_middle = wibox.widget.textbox("     ")
+local text_separator_right = wibox.widget.textbox("   ")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -78,15 +76,15 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
---beautiful.init(os.getenv("HOME") .. ".config/awesome/themes/nordic-awesome/theme.lua")
+--beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
+beautiful.init(gears.filesystem.get_themes_dir() .. "nordic-awesome/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 local terminal = "alacritty"
 local editor = os.getenv("EDITOR") or "nvim"
-local filemanager = os.getenv("HOME").."/.local/bin/lfrun"
+local filemanager = "thunar"
 local editor_cmd = terminal .. " -e " .. editor
-local filemanager_cmd = terminal .. " -e " .. filemanager
+-- local filemanager_cmd = terminal .. " -e " .. filemanager
 local browser = "qutebrowser"
 local browser_alt = "firefox"
 
@@ -212,8 +210,8 @@ awful.screen.connect_for_each_screen(function(s)
     --set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    --awful.tag({ " [1] ", " [2] ", " [3] ", " [4] ", " [5] ", " [6] " }, s, awful.layout.layouts[1])
-    awful.tag({ " [] ", " [] ", " [] ", " [] ", " [] ", " [] " }, s, awful.layout.layouts[1])
+    awful.tag({ " [1] ", " [2] ", " [3] ", " [4] ", " [5] ", " [6] " }, s, awful.layout.layouts[1])
+    --awful.tag({ " [] ", " [] ", " [] ", " [] ", " [] ", " [] " }, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -231,7 +229,7 @@ awful.screen.connect_for_each_screen(function(s)
         filter  = awful.widget.taglist.filter.all,
         buttons = taglist_buttons,
 	style = {
-		bg_focus = "#bf616a",
+		bg_focus = beautiful.bg_focus,
 		spacing = 10,
 		shape_focus = gears.shape.rounded_bar,
 		shape_border_width = 5,
@@ -246,7 +244,7 @@ awful.screen.connect_for_each_screen(function(s)
         filter  = awful.widget.tasklist.filter.currenttags,
         buttons = tasklist_buttons,
 	style = {
-		bg_focus = "#bf616a",
+		bg_focus = beautiful.bg_focus,
 		align = "center",
 		tasklist_disable_icon = true,
 		shape = gears.shape.rounded_bar,
@@ -270,57 +268,46 @@ awful.screen.connect_for_each_screen(function(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            wibox.widget.systray(),
-	    text_separator_left,
---          mykeyboardlayout,
---	    text_separator_middle,
-	    brightness_widget{
-		    type = 'icon_and_text',
-		    program = 'xbacklight',
-		    percentage = true,
-		    base = 50,
-		    step = 15,
-	    },
-	    text_separator_middle,
-	    volume_widget{
-		    widget_type = "icon_and_text",
-		    device = "pulse"
-	    },
-	    text_separator_middle,
-	    package_count,
-	    text_separator_middle,
---[[	    cpu_widget({
-		    width = 30,
-		    step_width = 3,
-		    step_spacing = 2,
-	    }),
-	    text_separator_middle,
-	    ram_widget({
-		    color_used = '#FF0000',
-	    }),
-	    text_separator_middle,
-]]--
-	    battery_widget{
-		    ac = "AC",
-		    adapter = "BAT0",
-		    widget_font = "Inconsolata",
---		    widget_text = " ${AC_BAT}${color_on}${percent}%${color_off}",
-		    widget_text = " ${color_on}${percent}%${color_off}",
-		    percent_colors = {
-			    { 15, "red" },
-			    { 27, "orange" },
-			    { 999, "green" },
-		    },
-		    tooltip_text = "Battery ${state}${time_est}\nCapacity: ${capacity_percent}%",
-	    },
-	    text_separator_middle,
-	    -- net_wired,
-	    net_wireless,
-	    text_separator_middle,
-            mytextclock,
-	    text_separator_right,
-	    logout_popup.widget{},
-            s.mylayoutbox
+			text_separator_left,
+			wibox.widget.systray(),
+			text_separator_middle,
+			brightness_widget{
+					type = 'icon_and_text',
+					program = 'xbacklight',
+					percentage = true,
+					base = 50,
+					step = 15,
+			},
+			text_separator_middle,
+			volume_widget{
+					widget_type = "icon_and_text",
+					device = "pulse"
+			},
+			text_separator_middle,
+			battery_widget{
+					ac = "AC",
+					adapter = "BAT0",
+					widget_font = "Inconsolata",
+					widget_text = " ${color_on}${percent}%${color_off}",
+					percent_colors = {
+							{ 15, "red" },
+							{ 27, "orange" },
+							{ 999, "green" },
+					},
+					tooltip_text = "Battery ${state}${time_est}\nCapacity: ${capacity_percent}%",
+			},
+			text_separator_middle,
+			net_wireless,
+			net_internet,
+			text_separator_middle,
+			mytextclock,
+			mytextclock:connect_signal("button::press",
+				function(_, _, _, button)
+						if button == 1 then cw.toggle() end
+				end),
+			text_separator_right,
+			logout_popup.widget{},
+			s.mylayoutbox
         },
     }
 end)
@@ -369,7 +356,7 @@ globalkeys = gears.table.join(
               {description = "focus the next screen", group = "screen"}),
     awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end,
               {description = "focus the previous screen", group = "screen"}),
-    awful.key({ modkey,           }, "u", awful.client.urgent.jumpto,
+    awful.key({ modkey, "Shift"   }, "u", awful.client.urgent.jumpto,
               {description = "jump to urgent client", group = "client"}),
     awful.key({ modkey,           }, "Tab",
         function ()
@@ -379,17 +366,21 @@ globalkeys = gears.table.join(
             end
         end,
         {description = "go back", group = "client"}),
+    awful.key({ modkey,		  }, "c", function() awful.placement.centered(client.focus) end,
+    	       { description = "center focused client" } ),
 
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
               {description = "open a terminal (alacritty)", group = "launcher"}),
-    awful.key({ modkey, "Shift" }, "Return", function () awful.spawn(terminal, {
+    awful.key({ modkey, "Shift" }, "Return", function () awful.spawn("urxvt", {
 	    tiled = false,
 	    floating = true,
-	    width = 800,
-	    height = 600,
-	    placement = awful.placement.centered,
-    }) end, { description = "open a terminal (alacritty)", group = "launcher"}),
+	    width = 720,
+	    height = 400,
+	    x = (screen[1].geometry.width - 720) / 2,
+	    y = 50,
+	    placement = awful.placement.top,
+    }) end, { description = "open a floating terminal (urxvt)", group = "launcher"}),
     awful.key({ modkey, "Control" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
     awful.key({ modkey, "Shift"   }, "q", logout_popup.launch,
@@ -419,10 +410,15 @@ globalkeys = gears.table.join(
               {description = "open alternate browser", group = "apps"}),
     awful.key({ modkey,           }, "y", function () awful.util.spawn("lowriter") end,
               {description = "open LibreOffice Writer", group = "apps"}),
-    awful.key({ modkey,           }, "u", function () awful.spawn(filemanager_cmd) end,
-              {description = "open file manager", group = "apps"}),
-    awful.key({ modkey, "Shift"   }, "u", function () awful.spawn(filemanager_cmd .. " /home/fede/.config") end,
-              {description = "open .config folder on file manager", group = "apps"}),
+    awful.key({ modkey,           }, "u", function () awful.spawn(filemanager) end,
+              {description = "open file manager (thunar)", group = "apps"}),
+    awful.key({ modkey, "Shift"   }, "u", function () awful.spawn(filemanager, {
+	    tiled = false,
+	    floating = true,
+	    width = 1360,
+	    height = 768,
+	    placement = awful.placement.centered,
+    }) end, { description = "open a floating file manager (thunar)", group = "apps"}),
     awful.key({ modkey,           }, "i", function () awful.spawn(editor_cmd) end,
               {description = "open an editor (nvim)", group = "apps"}),
     awful.key({ }, "Print", function() awful.util.spawn("gscreenshot") end,
@@ -656,7 +652,7 @@ awful.rules.rules = {
       properties = { opacity = 1,
       	             tiled = false,
 		     floating = true,
-		     tag = " [] ",
+		     tag = " [6] ",
  	             width = 1366,
 		     height = 768,
 		     placement = awful.placement.centered
@@ -755,11 +751,11 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- }}}
 
 -- gaps
-beautiful.useless_gap = 12
+beautiful.useless_gap = 9
 
 --config startup commands
 os.execute("xinput set-prop 'ETPS/2 Elantech Touchpad' 'libinput Tapping Enabled' 1")
-gears.wallpaper.maximized("/home/fede/docs/pics/.bg/mar2.jpg", s) --set wallpaper
+gears.wallpaper.maximized("/home/fede/docs/pics/.bg/mar2.jpg") --set wallpaper
 -- awful.spawn.with_shell("feh --randomize --bg-fill /home/fede/Imágenes/.bg/*.{jpeg,jpg,png}") --random wallpaper
 awful.spawn.with_shell("picom &")
-awful.spawn("discord-canary")
+awful.spawn("discord-canary", { })

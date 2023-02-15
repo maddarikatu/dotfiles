@@ -140,7 +140,7 @@ alias x="startx"
 alias pridefetch="/usr/local/bin/pridefetch -f gay"
 
 # Run LF with the lfimg script (https://github.com/cirala/lfimg)
-alias lf="$HOME/.local/bin/lfrun"
+alias lf="/usr/bin/lfrun"
 alias lf-base="/usr/bin/lf"
 
 # Run Nut
@@ -173,3 +173,20 @@ alias ed="/usr/bin/ed -v -p'ed> '"
 
 # run python3
 alias py="python3"
+
+# date(1) but the output is with english locale
+alias endate="LANG=en_US.UTF-8 date"
+
+alias tmpd="pushd /home/fede/.tmp"
+
+# bat alias for cat
+alias cat="/usr/bin/bat --paging=never"
+
+# open webcam in mpv
+alias webcam="mpv --profile=low-latency --untimed /dev/video0"
+
+# edit nvim config
+alias nvimcfg="nvim $HOME/.config/nvim/init.vim"
+
+# reload zsh config
+alias zrl="source $HOME/.zshrc"
