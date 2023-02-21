@@ -2,18 +2,16 @@
 
 echo "DEPRECATED: USE ./installfiles" && exit
 
-# # # # #					  # # # # #
-# USAGE: Run the script with the name of the program	  #
-# as the folder is named (e.g. alacritty, dwm, i3)	  #
-# or use 'all' for eveything and non-existent folders	  #
-# will just fail to be created.				  #
-# EXAMPLE: $ ./installfiles.sh polybar			  #
-# Configure $REPODIR to point to the directory your	  #
-# source repositories are (e.g. dwm, slstatus).		  #
-# Also configure $DOTDIR to the path in which you have	  #
-# cloned the dotfiles repo.				  #
-# !! Script is not completely optimised.		  #
-# # # # #					  # # # # #
+# USAGE: Run the script with the name of the program	  
+# as the folder is named (e.g. alacritty, dwm, i3)	  
+# or use 'all' for eveything and non-existent folders	  
+# will just fail to be created.				  
+# EXAMPLE: $ ./installfiles.sh polybar			  
+# Configure $REPODIR to point to the directory your	  
+# source repositories are (e.g. dwm, slstatus).		  
+# Also configure $DOTDIR to the path in which you have	  
+# cloned the dotfiles repo.				  
+# !! Script is not completely optimised.		  
 
 # Variables for directories
 export DOTFDIR=/home/$USER/dotfiles
