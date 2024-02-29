@@ -4,18 +4,19 @@
 # Shell alias dumpster (Source on shell's .rc)
 
 DOTF=$HOME/code/git/dotfiles
+EDITOR=nvim
 
 # # #	EDIT SHELL FILES
 # edit zsh config file
-alias zcfg="nvim $HOME/.zshrc"
+alias zcfg="$EDITOR $HOME/.zshrc"
 # edit bash config file
-alias bcfg="nvim $HOME/.bashrc"
+alias bcfg="$EDITOR $HOME/.bashrc"
 # edit this file itself
-alias vals="nvim $DOTF/shaliases"
+alias vals="$EDITOR $DOTF/shaliases"
 # edit functions
-alias vfuncs="nvim $DOTF/shfuncs"
+alias vfuncs="$EDITOR $DOTF/shfuncs"
 # edit variables
-alias vvars="nvim $DOTF/shvars"
+alias vvars="$EDITOR $DOTF/shvars"
 
 # echo this file
 alias als="cat $DOTF/shaliases"
@@ -24,50 +25,50 @@ alias also="grep --color=never \"alias \" $DOTF/shaliases"
 
 # # #	OPEN PROGRAMS
 # open nvim
-alias v=nvim
+alias v=$EDITOR
 
 # # #	PACKAGE MANAGER COMMANDS
 # sync and update pacman packages
-alias upd="sudo pacman -Syu"
+# alias upd="sudo pacman -Syu --noconfirm"
 ## alias upd="sudo xbps-install -Su"
-## alias upd="sudo apt update && sudo apt upgrade"
+alias upd="sudo apt update && sudo apt upgrade"
 # install with pacman
-alias pi="sudo pacman -S"
+# alias pi="sudo pacman -S"
 ## alias pi="sudo xbps-install -S"
-## alias pi="sudo apt install"
+alias pi="sudo apt install"
 # install from local .pkg.tar.zst
-alias pil="sudo pacman -U"
+# alias pil="sudo pacman -U"
 ## alias pil="sudo xbps-install --repository ."
-## alias pil="sudo dpkg -i"
+alias pil="sudo dpkg -i"
 # install from xbps-src
 ## alias pil-src="sudo xbps-install --repository hostdir/binpkgs"
 # remove package and dependencies
-alias pr="sudo pacman -Rs"
+# alias pr="sudo pacman -Rs"
 ## alias pr="sudo xbps-remove -Ro"
-## alias pr="sudo apt-get purge"
+alias pr="sudo apt-get purge"
 # remove orphans
-alias rm-orphs="pacman -Qtdq | sudo pacman -Rns -"
+# alias rm-orphs="pacman -Qtdq | sudo pacman -Rns -"
 ## alias rm-orphs="sudo xbps-remove -O"
-## alias rm-orphs="sudo apt-get autoremove"
+alias rm-orphs="sudo apt-get autoremove"
 # search from official repos
-alias psc="pacman -Ss"
+#alias psc="pacman -Ss"
 ## alias psc="xbps-query -Rs"
-## alias psc="apt search"
+alias psc="apt search"
 # search local packages
-alias pq="pacman -Q"
+# alias pq="pacman -Q"
 ## alias pq="xbps-query -s"
-## alias pq="apt list --installed"
+alias pq="apt list --installed"
 # Sync pacman repositories
-alias psy="sudo pacman -Sy"
+# alias psy="sudo pacman -Sy"
 # Install as dependency
-alias pi-dep="sudo pacman -S --asdeps"
+# alias pi-dep="sudo pacman -S --asdeps"
 
 # sync and update AUR packages
-alias upds="paru -Syu"
+# alias upds="paru -Syu"
 # install from AUR (with paru)
-alias pai="paru -S"
+# alias pai="paru -S"
 # search from AUR
-alias pasc="paru -Ss"
+# alias pasc="paru -Ss"
 
 # # #	PLAY WITH FILES AND DIRECTORIES
 # remove reclusively
@@ -75,7 +76,7 @@ alias rmd="rm -fr"
 # move to previous directory
 alias pv="cd .."
 # Self explainatory.
-alias ls="/usr/bin/ls --color='auto'"
+alias ls="/usr/bin/ls --color='auto' --group-directories-first"
 alias ll="/usr/bin/ls -lh --color=auto --group-directories-first"
 # Get number of elements in a diretory
 alias howmany="ls | wc -l"
@@ -85,7 +86,7 @@ alias howmanyall="ls -A | wc -l"
 alias bg="cd $HOME/docs/pics/.bg && ls"
 alias dw="cd $HOME/docs/downs && ls"
 alias dm="cd $HOME/docs && ls"
-alias ap="cd $HOME/docs/apuntes/2022-2 && ls"
+alias ap="cd $HOME/docs/apuntes/2023-1/PRU/markdown && ls"
 alias gm="cd $HOME/Games && ls"
 alias dotf="cd $DOTF && ls"
 alias rps="cd $HOME/code/repos && ls"
@@ -137,10 +138,10 @@ alias cgi="cargo install"
 alias x="startx"
 
 # Run pridefetch with the tumblr gay flag by default
-alias pridefetch="/usr/local/bin/pridefetch -f gay"
+alias pridefetch="/usr/bin/pridefetch -f gay"
 
 # Run LF with the lfimg script (https://github.com/cirala/lfimg)
-alias lf="/usr/bin/lfrun"
+alias lf="$HOME/.local/bin/lfrun"
 alias lf-base="/usr/bin/lf"
 
 # Run Nut
@@ -152,24 +153,21 @@ alias textl="cp $HOME/docs/template.tex"
 # ssh
 alias sshome="ssh fede@alpine-pc || ssh fede@home"
 
-# glow -p
-alias glow="/usr/bin/glow -p"
-
 # Open zsh history file
-alias zhist="nvim $HOME/.zhistfile"
+alias zhist="$EDITOR $HOME/.zhistfile"
 
 # Open awesome config directory
 alias aw="cd $HOME/.config/awesome"
 # Open awesome config file
-alias awf="nvim $HOME/.config/awesome/rc.lua"
+alias awf="$EDITOR $HOME/.config/awesome/rc.lua"
 
 # Sync pacman repositories
-alias psy="sudo pacman -Sy"
+# alias psy="sudo pacman -Sy"
 # Install as dependency
-alias pi-dep="sudo pacman -S --asdeps"
+# alias pi-dep="sudo pacman -S --asdeps"
 
 # ed with prompt
-alias ed="/usr/bin/ed -v -p'ed> '"
+alias ed="/usr/bin/rlwrap /usr/bin/ed -v -p'ed> '"
 
 # run python3
 alias py="python3"
@@ -177,16 +175,33 @@ alias py="python3"
 # date(1) but the output is with english locale
 alias endate="LANG=en_US.UTF-8 date"
 
-alias tmpd="pushd /home/fede/.tmp"
-
-# bat alias for cat
-alias cat="/usr/bin/bat --paging=never"
-
 # open webcam in mpv
 alias webcam="mpv --profile=low-latency --untimed /dev/video0"
 
 # edit nvim config
-alias nvimcfg="nvim $HOME/.config/nvim/init.vim"
+alias nvimcfg="$EDITOR $HOME/.config/nvim/"
 
 # reload zsh config
 alias zrl="source $HOME/.zshrc"
+
+# make executable
+alias chmox="chmod +x"
+
+# re-source rc file
+alias so="source ~/.zshrc"
+
+# silent curl
+alias curs="curl -s"
+
+# Change to ~/code directory
+alias cood="cd $HOME/code/src"
+
+# Change directory to code projects folder
+alias proj="cd $HOME/code/proj"
+
+# Open markdown index
+alias index="$EDITOR index.md"
+
+alias del="trash-put"
+
+alias gren="grep -n"

@@ -126,7 +126,7 @@ tarless() {
 }
 
 ipcow() {
-	printf "%i.%i.%i.%i\n" `shuf -n4 -i0-255` | cowsay
+	printf "%i.%i.%i.%i\n" `shuf -n4 -i0-255` | /usr/games/cowsay $@
 }
 
 ghcl() {
@@ -163,4 +163,28 @@ colors() {
 sqrt() {
 	sc=$([ -z $2 ] && echo 5 || echo "$2")
 	echo "scale=$sc; sqrt($1)" | bc
+}
+
+# __psc() {
+# 	echo "$1 is not in the official repos"
+# 	echo "AUR resuts:"
+# 	paru -Ss $1
+# }
+#
+# psc() {
+# 	pacman -Ss $1 || __psc $1
+# }
+
+twinkcel() {
+	cd $HOME/code/proj/twinkcel
+	codium .
+	python -m http.server --bind 127.0.0.1 9000
+}
+
+cat() {
+  if [ ! $(echo $1 | grep -q ".md") ]; then
+    /usr/bin/glow $1
+  else
+    /usr/bin/batcat --paging=never $1
+  fi
 }

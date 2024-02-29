@@ -14,3 +14,5 @@ export RUSTUP_HOME=$HOME/code/.rustup
 export NODE_PATH=$HOME/code/.node_modules
 
 export GRADLE_USER_HOME=$HOME/code/.gradle
+
+export inpush=1
