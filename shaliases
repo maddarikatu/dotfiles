@@ -205,3 +205,9 @@ alias index="$EDITOR index.md"
 alias del="trash-put"
 
 alias gren="grep -n"
+
+alias bat="batcat"
+alias cat="batcat --paging=never"
+alias ccat="/usr/bin/cat"
+
+alias tfg="cd $HOME/docs/apuntes/2023-1/TFG"

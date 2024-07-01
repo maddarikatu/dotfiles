@@ -180,11 +180,3 @@ twinkcel() {
 	codium .
 	python -m http.server --bind 127.0.0.1 9000
 }
-
-cat() {
-  if [ ! $(echo $1 | grep -q ".md") ]; then
-    /usr/bin/glow $1
-  else
-    /usr/bin/batcat --paging=never $1
-  fi
-}
