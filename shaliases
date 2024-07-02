@@ -76,8 +76,8 @@ alias rmd="rm -fr"
 # move to previous directory
 alias pv="cd .."
 # Self explainatory.
-alias ls="/usr/bin/ls --color='auto' --group-directories-first"
-alias ll="/usr/bin/ls -lh --color=auto --group-directories-first"
+alias ls="/bin/ls --color='auto'"
+alias ll="/bin/ls -lh --color=auto"
 # Get number of elements in a diretory
 alias howmany="ls | wc -l"
 # Get number of elements in a directory including hidden
@@ -138,11 +138,11 @@ alias cgi="cargo install"
 alias x="startx"
 
 # Run pridefetch with the tumblr gay flag by default
-alias pridefetch="/usr/bin/pridefetch -f gay"
+alias pridefetch="/usr/local/bin/pridefetch -f gay"
 
 # Run LF with the lfimg script (https://github.com/cirala/lfimg)
-alias lf="$HOME/.local/bin/lfrun"
-alias lf-base="/usr/bin/lf"
+# alias lf="$HOME/.local/bin/lfrun"
+# alias lf-base="/usr/bin/lf"
 
 # Run Nut
 alias nut="python3 $HOME/code/repos/nut/nut_gui.py"
@@ -167,7 +167,7 @@ alias awf="$EDITOR $HOME/.config/awesome/rc.lua"
 # alias pi-dep="sudo pacman -S --asdeps"
 
 # ed with prompt
-alias ed="/usr/bin/rlwrap /usr/bin/ed -v -p'ed> '"
+alias ed="/usr/local/bin/rlwrap /bin/ed -v -p'ed> '"
 
 # run python3
 alias py="python3"
@@ -208,6 +208,10 @@ alias gren="grep -n"
 
 alias bat="batcat"
 alias cat="batcat --paging=never"
+<<<<<<< HEAD
+alias ccat="/bin/cat"
+=======
 alias ccat="/usr/bin/cat"
+>>>>>>> 0e66cc08da786942c5a16329db60ed19151690ff
 
 alias tfg="cd $HOME/docs/apuntes/2023-1/TFG"
