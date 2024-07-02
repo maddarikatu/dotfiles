@@ -208,10 +208,5 @@ alias gren="grep -n"
 
 alias bat="batcat"
 alias cat="batcat --paging=never"
-<<<<<<< HEAD
-alias ccat="/bin/cat"
-=======
-alias ccat="/usr/bin/cat"
->>>>>>> 0e66cc08da786942c5a16329db60ed19151690ff
 
 alias tfg="cd $HOME/docs/apuntes/2023-1/TFG"
