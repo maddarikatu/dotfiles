@@ -4,7 +4,7 @@
 # Shell function dumpster (Source on shell's .rc).
 
 CFG=$HOME/.zshrc
-DOTFDIR=$HOME/code/git/dotfiles
+DOTFDIR=$HOME/code/git/dotfiles/zshmod/
 VALS=$DOTFDIR/shaliases
 
 aliasadd() {
@@ -164,16 +164,6 @@ sqrt() {
 	sc=$([ -z $2 ] && echo 5 || echo "$2")
 	echo "scale=$sc; sqrt($1)" | bc
 }
-
-# __psc() {
-# 	echo "$1 is not in the official repos"
-# 	echo "AUR resuts:"
-# 	paru -Ss $1
-# }
-#
-# psc() {
-# 	pacman -Ss $1 || __psc $1
-# }
 
 twinkcel() {
 	cd $HOME/code/proj/twinkcel

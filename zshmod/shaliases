@@ -3,12 +3,12 @@
 # shalises
 # Shell alias dumpster (Source on shell's .rc)
 
-DOTF=$HOME/code/git/dotfiles
+DOTF=$HOME/code/git/dotfiles/zshmod/
 EDITOR=nvim
 
 # # #	EDIT SHELL FILES
 # edit zsh config file
-alias zcfg="$EDITOR $HOME/.zshrc"
+alias zcfg="$EDITOR $DOTF/zshrc"
 # edit bash config file
 alias bcfg="$EDITOR $HOME/.bashrc"
 # edit this file itself
@@ -31,33 +31,39 @@ alias v=$EDITOR
 # sync and update pacman packages
 # alias upd="sudo pacman -Syu --noconfirm"
 ## alias upd="sudo xbps-install -Su"
-alias upd="sudo apt update && sudo apt upgrade"
+# alias upd="sudo apt update && sudo apt upgrade"
+alias upd="sudo pkg update"
 # install with pacman
 # alias pi="sudo pacman -S"
 ## alias pi="sudo xbps-install -S"
-alias pi="sudo apt install"
+# alias pi="sudo apt install"
+alias pi="sudo pkg install"
 # install from local .pkg.tar.zst
 # alias pil="sudo pacman -U"
 ## alias pil="sudo xbps-install --repository ."
-alias pil="sudo dpkg -i"
+# alias pil="sudo dpkg -i"
 # install from xbps-src
 ## alias pil-src="sudo xbps-install --repository hostdir/binpkgs"
 # remove package and dependencies
 # alias pr="sudo pacman -Rs"
 ## alias pr="sudo xbps-remove -Ro"
-alias pr="sudo apt-get purge"
+# alias pr="sudo apt-get purge"
+alias pr="sudo pkg delete -f"
 # remove orphans
 # alias rm-orphs="pacman -Qtdq | sudo pacman -Rns -"
 ## alias rm-orphs="sudo xbps-remove -O"
-alias rm-orphs="sudo apt-get autoremove"
+# alias rm-orphs="sudo apt-get autoremove"
+alias rm-orphs="sudo pkg autoremove"
 # search from official repos
 #alias psc="pacman -Ss"
 ## alias psc="xbps-query -Rs"
-alias psc="apt search"
+# alias psc="apt search"
+alias psc="pkg search"
 # search local packages
 # alias pq="pacman -Q"
 ## alias pq="xbps-query -s"
-alias pq="apt list --installed"
+# alias pq="apt list --installed"
+alias pq="pkg info"
 # Sync pacman repositories
 # alias psy="sudo pacman -Sy"
 # Install as dependency
@@ -93,18 +99,20 @@ alias rps="cd $HOME/code/repos && ls"
 
 # # #	SYSTEMD AND OPENRC COMMANDS
 # enable systemd service (now)
-alias syse="sudo systemctl enable --now"
+# alias syse="sudo systemctl enable --now"
 # disable systemd service (now)
-alias sysd="sudo systemctl disable --now"
+# alias sysd="sudo systemctl disable --now"
 # start systemd service for this session
-alias sysst="sudo systemctl start"
+# alias sysst="sudo systemctl start"
 # stop systemd service for this session
-alias syssp="sudo systemctl stop"
+# alias syssp="sudo systemctl stop"
 
 # rc-update
-alias rcu="rc-update"
+# alias rcu="rc-update"
 # rc-service
-alias rcs="rc-service"
+# alias rcs="rc-service"
+#
+# # # TODO: FreeBSD rc.conf
 
 # # #	GIT COMMANDS
 # clone git repo
@@ -150,9 +158,6 @@ alias nut="python3 $HOME/code/repos/nut/nut_gui.py"
 # copy tex template
 alias textl="cp $HOME/docs/template.tex"
 
-# ssh
-alias sshome="ssh fede@alpine-pc || ssh fede@home"
-
 # Open zsh history file
 alias zhist="$EDITOR $HOME/.zhistfile"
 
@@ -160,11 +165,6 @@ alias zhist="$EDITOR $HOME/.zhistfile"
 alias aw="cd $HOME/.config/awesome"
 # Open awesome config file
 alias awf="$EDITOR $HOME/.config/awesome/rc.lua"
-
-# Sync pacman repositories
-# alias psy="sudo pacman -Sy"
-# Install as dependency
-# alias pi-dep="sudo pacman -S --asdeps"
 
 # ed with prompt
 alias ed="/usr/local/bin/rlwrap /bin/ed -v -p'ed> '"
@@ -180,9 +180,6 @@ alias webcam="mpv --profile=low-latency --untimed /dev/video0"
 
 # edit nvim config
 alias nvimcfg="$EDITOR $HOME/.config/nvim/"
-
-# reload zsh config
-alias zrl="source $HOME/.zshrc"
 
 # make executable
 alias chmox="chmod +x"
@@ -202,11 +199,9 @@ alias proj="cd $HOME/code/proj"
 # Open markdown index
 alias index="$EDITOR index.md"
 
-alias del="trash-put"
-
 alias gren="grep -n"
 
-alias bat="batcat"
-alias cat="batcat --paging=never"
+alias cat="bat --paging=never"
+alias ccat="/bin/cat"
 
 alias tfg="cd $HOME/docs/apuntes/2023-1/TFG"
