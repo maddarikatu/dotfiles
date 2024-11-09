@@ -10,4 +10,4 @@ source $HOME/code/git/dotfiles/zshmod/loads
 source $HOME/code/git/dotfiles/zshmod/autorun
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.config/.p10k.zsh ]] || source ~/.config/.p10k.zsh
+[[ ! -f $HOME/code/git/dotfiles/p10k.zsh ]] || source $HOME/code/git/dotfiles/p10k.zsh

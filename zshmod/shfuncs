@@ -170,3 +170,18 @@ twinkcel() {
 	codium .
 	python -m http.server --bind 127.0.0.1 9000
 }
+
+rmd() {
+    # Prompt the user for confirmation
+    echo -n "¿Elimitar $@? [y/N]: "
+    read -r confirm
+
+    # Check if the user confirmed with 'y' or 'Y'
+    if [[ $confirm == [yY] ]]; then
+        # Execute the 'rm -fr' command
+        rm -vfr "$@"
+    else
+        # Abort the operation
+        echo "Nada borrado."
+    fi
+}

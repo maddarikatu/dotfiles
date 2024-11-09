@@ -29,56 +29,56 @@ alias v=$EDITOR
 
 # # #	PACKAGE MANAGER COMMANDS
 # sync and update pacman packages
-# alias upd="sudo pacman -Syu --noconfirm"
+alias upd="sudo pacman -Syu --noconfirm"
 ## alias upd="sudo xbps-install -Su"
 # alias upd="sudo apt update && sudo apt upgrade"
-alias upd="sudo pkg update"
+# alias upd="sudo pkg update"
 # install with pacman
-# alias pi="sudo pacman -S"
+alias pi="sudo pacman -S"
 ## alias pi="sudo xbps-install -S"
 # alias pi="sudo apt install"
-alias pi="sudo pkg install"
+# alias pi="sudo pkg install"
 # install from local .pkg.tar.zst
-# alias pil="sudo pacman -U"
+alias pil="sudo pacman -U"
 ## alias pil="sudo xbps-install --repository ."
 # alias pil="sudo dpkg -i"
 # install from xbps-src
 ## alias pil-src="sudo xbps-install --repository hostdir/binpkgs"
 # remove package and dependencies
-# alias pr="sudo pacman -Rs"
+alias pr="sudo pacman -Rs"
 ## alias pr="sudo xbps-remove -Ro"
 # alias pr="sudo apt-get purge"
-alias pr="sudo pkg delete -f"
+# alias pr="sudo pkg delete -f"
 # remove orphans
-# alias rm-orphs="pacman -Qtdq | sudo pacman -Rns -"
+alias rm-orphs="pacman -Qtdq | sudo pacman -Rns -"
 ## alias rm-orphs="sudo xbps-remove -O"
 # alias rm-orphs="sudo apt-get autoremove"
-alias rm-orphs="sudo pkg autoremove"
+# alias rm-orphs="sudo pkg autoremove"
 # search from official repos
-#alias psc="pacman -Ss"
+alias psc="pacman -Ss"
 ## alias psc="xbps-query -Rs"
 # alias psc="apt search"
-alias psc="pkg search"
+# alias psc="pkg search"
 # search local packages
-# alias pq="pacman -Q"
+alias pq="pacman -Q"
 ## alias pq="xbps-query -s"
 # alias pq="apt list --installed"
-alias pq="pkg info"
+# alias pq="pkg info"
 # Sync pacman repositories
-# alias psy="sudo pacman -Sy"
+alias psy="sudo pacman -Sy"
 # Install as dependency
-# alias pi-dep="sudo pacman -S --asdeps"
+alias pi-dep="sudo pacman -S --asdeps"
 
 # sync and update AUR packages
-# alias upds="paru -Syu"
+alias upds="paru -Syu"
 # install from AUR (with paru)
-# alias pai="paru -S"
+alias pai="paru -S"
 # search from AUR
-# alias pasc="paru -Ss"
+alias pasc="paru -Ss"
 
 # # #	PLAY WITH FILES AND DIRECTORIES
 # remove reclusively
-alias rmd="rm -fr"
+# alias rmd="rm -fr"
 # move to previous directory
 alias pv="cd .."
 # Self explainatory.
@@ -99,13 +99,13 @@ alias rps="cd $HOME/code/repos && ls"
 
 # # #	SYSTEMD AND OPENRC COMMANDS
 # enable systemd service (now)
-# alias syse="sudo systemctl enable --now"
+alias syse="sudo systemctl enable --now"
 # disable systemd service (now)
-# alias sysd="sudo systemctl disable --now"
+alias sysd="sudo systemctl disable --now"
 # start systemd service for this session
-# alias sysst="sudo systemctl start"
+alias sysst="sudo systemctl start"
 # stop systemd service for this session
-# alias syssp="sudo systemctl stop"
+alias syssp="sudo systemctl stop"
 
 # rc-update
 # alias rcu="rc-update"
@@ -167,7 +167,7 @@ alias aw="cd $HOME/.config/awesome"
 alias awf="$EDITOR $HOME/.config/awesome/rc.lua"
 
 # ed with prompt
-alias ed="/usr/local/bin/rlwrap /bin/ed -v -p'ed> '"
+alias ed="/usr/bin/rlwrap /bin/ed -v -p'ed> '"
 
 # run python3
 alias py="python3"

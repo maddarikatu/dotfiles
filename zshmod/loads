@@ -6,12 +6,12 @@ source $DOTF/shaliases
 source $DOTF/shfuncs
 source $DOTF/shvars
 
-# freebsd ports shells/zsh-syntax-highlighting
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-# freebsd ports shells/zsh-autosuggestions
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# /zsh-syntax-highlighting
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# /zsh-autosuggestions
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 source $DOTF/LF_ICONS
 
 # https://github.com/romkatv/powerlevel10k
-source $HOME/.config/powerlevel10k/powerlevel10k.zsh-theme
+source $HOME/code/repos/powerlevel10k/powerlevel10k.zsh-theme
