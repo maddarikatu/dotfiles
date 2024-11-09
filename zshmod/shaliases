@@ -199,7 +199,7 @@ alias proj="cd $HOME/code/proj"
 # Open markdown index
 alias index="$EDITOR index.md"
 
-alias gren="grep -n"
+alias ngrep="grep -n"
 
 alias cat="bat --paging=never"
 alias ccat="/bin/cat"
